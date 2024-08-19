@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "../db/db.connect";
+import { connectDB } from "../db/connectDB";
 
 import todosRouter from "../router/todosRouter";
 import authRouter from "../router/authRouter";

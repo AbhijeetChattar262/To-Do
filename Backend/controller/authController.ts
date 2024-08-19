@@ -1,4 +1,4 @@
-import { db } from "../db/db.connect";
+import { db } from "../db/connectDB";
 import bcrypt from "bcrypt";
 import mysql, { RowDataPacket } from "mysql2";
 import { Request, Response } from "express";

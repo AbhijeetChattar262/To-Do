@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../db/db.connect";
+import { db } from "../db/connectDB";
 import mysql, { RowDataPacket } from "mysql2";
 
 export const addTodo = (req: Request, res: Response) => {
