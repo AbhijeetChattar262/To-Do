@@ -24,7 +24,7 @@ This is a Todo App with a secure login system where users can register and log i
 
 2. Install required packages:
    ```bash
-   npm install mysql2 cors express jsonwebtoken typescript
+   npm install
 
 ### Frontend
 1. Navigate to the frontend directory:
@@ -34,7 +34,7 @@ This is a Todo App with a secure login system where users can register and log i
    
 2. Install required packages:
    ```bash
-   npm install react-bootstrap react-dom react-router-dom
+   npm install
    ```
 
 ## Usage
