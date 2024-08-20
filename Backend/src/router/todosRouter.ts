@@ -3,10 +3,10 @@ import { verifyToken } from "../middleware/verifyToken";
 import {
   addTodo,
   deleteTodo,
+  updateTodo,
   getTodos,
   toggleComplete,
-  updateTodo,
-} from "../controller/todosController";
+} from "../controller/todosController/todosController";
 
 const todosRouter = Router();
 

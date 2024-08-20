@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { handleLogin } from "../services/authServices/authServices";
 import { Form, Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,39 +9,8 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:5000/login", {
-        username,
-        password,
-      });
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("username", username);
-
-      Swal.fire({
-        icon: "success",
-        title: "Login Successful",
-        text: "Welcome back!",
-        background: "#d4edda",
-        color: "#155724",
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "Proceed",
-      }).then(() => {
-        navigate("/todos");
-      });
-    } catch (error: any) {
-      console.error("Login error", error);
-      Swal.fire({
-        icon: "error",
-        title: "Authentication Failed",
-        text: error.response?.data.message || "Enter correct credentials!!",
-        background: "#f8d7da",
-        color: "#721c24",
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "Try Again",
-      });
-    }
+  const onSubmit = (e: React.FormEvent) => {
+    handleLogin(e, username, password, navigate);
   };
 
   return (
@@ -52,7 +20,7 @@ const Login: React.FC = () => {
     >
       <h2 className="mb-4">Login</h2>
       <Form
-        onSubmit={handleLogin}
+        onSubmit={onSubmit}
         style={{
           width: "100%",
           maxWidth: "400px",
