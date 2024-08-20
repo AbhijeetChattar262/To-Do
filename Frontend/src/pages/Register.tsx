@@ -26,6 +26,7 @@ const Register: React.FC = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setUsername(e.target.value)
                 }
+                required
               />
             </Form.Group>
             <Form.Group controlId="formPassword" className="mt-3">
@@ -36,6 +37,7 @@ const Register: React.FC = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setPassword(e.target.value)
                 }
+                required
               />
             </Form.Group>
             <Button

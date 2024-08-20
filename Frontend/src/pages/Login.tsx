@@ -37,6 +37,7 @@ const Login: React.FC = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter your username"
+            required
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -46,6 +47,7 @@ const Login: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
+            required
           />
         </Form.Group>
         <Button variant="primary" type="submit" className="w-100 mb-2">

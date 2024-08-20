@@ -7,6 +7,9 @@ import jwt from "jsonwebtoken";
 // User Login
 const loginUser = (req: Request, res: Response) => {
   const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).send("Credentials Needed");
+  }
 
   db.query(
     "SELECT * FROM users WHERE username = ?",

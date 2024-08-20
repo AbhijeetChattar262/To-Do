@@ -43,6 +43,7 @@ const Todos: React.FC = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setNewTask(e.target.value)
                 }
+                required
               />
             </Form.Group>
             <Button
