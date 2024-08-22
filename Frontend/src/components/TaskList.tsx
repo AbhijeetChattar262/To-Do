@@ -4,7 +4,7 @@ import {
   handleDeleteTask,
   handleEditTask,
   handleToggleCompleted,
-} from "../services/todoServices/todoServices";
+} from "../services/todoServices";
 
 interface TaskListProps {
   todos: Todo[];

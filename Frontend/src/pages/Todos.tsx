@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Todo } from "../interface/Todo";
-import {
-  handleAddTask,
-  handleUpdateTask,
-} from "../services/todoServices/todoServices";
-import { handleLogout } from "../services/authServices/authServices";
+import { handleAddTask, handleUpdateTask } from "../services/todoServices";
+import { handleLogout } from "../services/authServices";
 import fetchTodos from "../services/todoServices/fetchTodos";
 import TaskList from "../components/TaskList";
 import { useNavigate } from "react-router-dom";

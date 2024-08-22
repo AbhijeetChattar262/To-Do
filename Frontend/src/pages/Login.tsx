@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleLogin } from "../services/authServices/authServices";
+import { handleLogin } from "../services/authServices";
 import { Form, Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -18,7 +18,7 @@ const Login: React.FC = () => {
       className="d-flex flex-column justify-content-center align-items-center"
       style={{ height: "100vh" }}
     >
-      <h2 className="mb-4">Login</h2>
+      <h2 className="mb-4 login-form">Login</h2>
       <Form
         onSubmit={onSubmit}
         style={{

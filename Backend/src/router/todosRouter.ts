@@ -6,7 +6,7 @@ import {
   updateTodo,
   getTodos,
   toggleComplete,
-} from "../controller/todosController/todosController";
+} from "../controller/todosController";
 
 const todosRouter = Router();
 
