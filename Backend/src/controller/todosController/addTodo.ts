@@ -9,7 +9,7 @@ const addTodo = (req: Request, res: Response) => {
   const userId = req.user.id;
 
   db.query(
-    "INSERT INTO todos (user_id_FK, task) VALUES (?, ?)",
+    "INSERT INTO todos (user_id, task) VALUES (?, ?)",
     [userId, task],
     (err, result) => {
       if (err) return res.status(500).json({ message: "Error adding task" });

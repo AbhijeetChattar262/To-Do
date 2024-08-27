@@ -8,7 +8,7 @@ const deleteTodo = (req: Request, res: Response) => {
   const userId = req.user.id;
 
   db.query(
-    "DELETE FROM todos WHERE id = ? AND user_id_FK = ?",
+    "DELETE FROM todos WHERE id = ? AND user_id = ?",
     [id, userId],
     (err) => {
       if (err) return res.status(500).json({ message: "Error deleting task" });
