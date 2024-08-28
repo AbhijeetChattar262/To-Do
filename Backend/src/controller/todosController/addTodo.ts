@@ -12,8 +12,8 @@ const addTodo = (req: Request, res: Response) => {
   const userId = req.user.id;
 
   db.query(
-    "INSERT INTO todos (user_id_FK, task) VALUES (?, ?)",
-    [userId, task],
+    "INSERT INTO todos (user_id_FK, task, completed) VALUES (?, ?, ?)",
+    [userId, task, 0],
     (err, result) => {
       if (err) {
         console.error("Database Error:", err); // Debug output
