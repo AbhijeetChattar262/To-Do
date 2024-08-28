@@ -7,12 +7,17 @@ export const verifyToken = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers["authorization"];
+  const authHeader = req.headers["authorization"];
+  const token =
+    authHeader && authHeader.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : null;
+
   if (!token) return res.status(401).json({ message: "Access Denied" });
 
   try {
     const verified = jwt.verify(
-      token as string,
+      token,
       process.env.JWT_SECRET || "defaultSecret"
     );
     req.user = verified as { id: number };

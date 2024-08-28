@@ -9,7 +9,7 @@ const updateTodo = (req: Request, res: Response) => {
   const userId = req.user.id;
 
   db.query(
-    "UPDATE todos SET task = ? WHERE id = ? AND user_id = ?",
+    "UPDATE todos SET task = ? WHERE id = ? AND user_id_FK = ?",
     [task, id, userId],
     (err) => {
       if (err) return res.status(500).json({ message: "Error updating task" });

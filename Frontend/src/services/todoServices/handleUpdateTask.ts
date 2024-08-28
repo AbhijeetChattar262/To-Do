@@ -17,7 +17,7 @@ const handleUpdateTask = async (
     { task: newTask },
     {
       headers: {
-        Authorization: token || "",
+        Authorization: `Bearer ${token}`,
       },
     }
   );

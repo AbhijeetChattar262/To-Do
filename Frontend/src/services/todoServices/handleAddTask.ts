@@ -8,17 +8,22 @@ const handleAddTask = async (
   setNewTask: React.Dispatch<React.SetStateAction<string>>
 ) => {
   const token = localStorage.getItem("token");
-  const response = await axios.post<Todo>(
-    "http://localhost:5000/todos",
-    { task: newTask },
-    {
-      headers: {
-        Authorization: token || "",
-      },
-    }
-  );
-  setTodos([...todos, response.data]);
-  setNewTask("");
+
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/todos",
+      { task: newTask },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setTodos([...todos, response.data]);
+    setNewTask("");
+  } catch (error) {
+    console.error("Failed to add task:", error);
+  }
 };
 
 export default handleAddTask;
