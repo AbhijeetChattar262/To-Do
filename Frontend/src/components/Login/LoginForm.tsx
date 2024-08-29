@@ -1,26 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { handleLogin } from "../../services/authServices";
 
-interface LoginFormProps {
-  username: string;
-  password: string;
-  onUsernameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: React.FormEvent) => void;
-  onRegister: () => void;
-}
-
-const LoginForm: React.FC<LoginFormProps> = ({
-  username,
-  password,
-  onUsernameChange,
-  onPasswordChange,
-  onSubmit,
-  onRegister,
-}) => {
+const LoginForm: React.FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(e) => handleLogin(e, username, password, navigate)}
       style={{
         width: "100%",
         maxWidth: "400px",
@@ -35,7 +24,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         <Form.Control
           type="text"
           value={username}
-          onChange={onUsernameChange}
+          onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter your username"
           required
         />
@@ -45,7 +34,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         <Form.Control
           type="password"
           value={password}
-          onChange={onPasswordChange}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password"
           required
         />
@@ -56,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       <Button
         variant="secondary"
         type="button"
-        onClick={onRegister}
+        onClick={() => navigate("/register")}
         className="w-100"
       >
         Register

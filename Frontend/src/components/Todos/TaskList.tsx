@@ -21,12 +21,7 @@ const TaskList: React.FC<TaskListProps> = ({
   setEditingTask,
   completed,
 }) => {
-  // completed = completed === true ? 1 : 0;
-  console.log("Todos:", todos, "Completed:", completed); // Debugging
   const filteredTodos = todos.filter((todo) => todo.completed == completed);
-
-  // console.log("Filtered Todos:", filteredTodos);
-
   return (
     <ListGroup>
       {filteredTodos.map((todo) => (

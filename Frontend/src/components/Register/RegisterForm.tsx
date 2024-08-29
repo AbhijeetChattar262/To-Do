@@ -1,23 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import { handleRegister } from "../../services/authServices";
 
-interface RegisterFormProps {
-  username: string;
-  password: string;
-  onUsernameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onRegister: () => void;
-  onLoginRedirect: () => void;
-}
-
-const RegisterForm: React.FC<RegisterFormProps> = ({
-  username,
-  password,
-  onUsernameChange,
-  onPasswordChange,
-  onRegister,
-  onLoginRedirect,
-}) => {
+const RegisterForm: React.FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
   return (
     <Form>
       <Form.Group controlId="formUsername">
@@ -25,7 +14,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
           type="text"
           placeholder="Username"
           value={username}
-          onChange={onUsernameChange}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
       </Form.Group>
@@ -34,17 +23,21 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
           type="password"
           placeholder="Password"
           value={password}
-          onChange={onPasswordChange}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
       </Form.Group>
-      <Button className="mt-4 w-100" variant="primary" onClick={onRegister}>
+      <Button
+        className="mt-4 w-100"
+        variant="primary"
+        onClick={() => handleRegister(username, password, navigate)}
+      >
         Register
       </Button>
       <Button
         className="mt-3 w-100"
         variant="success"
-        onClick={onLoginRedirect}
+        onClick={() => navigate("/login")}
       >
         Already have an account? Login
       </Button>
