@@ -35,7 +35,11 @@ Todo.init(
         },
         user_id_FK: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: "users",
+                key: "id"
+            }
         }
     },
     {
