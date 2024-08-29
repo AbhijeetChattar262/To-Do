@@ -12,7 +12,7 @@ const handleToggleCompleted = async (
     {},
     {
       headers: {
-        Authorization: token || "",
+        Authorization: `Bearer ${token}`,
       },
     }
   );

@@ -7,12 +7,24 @@ const handleDeleteTask = async (
   todos: Todo[]
 ) => {
   const token = localStorage.getItem("token");
-  await axios.delete(`http://localhost:5000/todos/${id}`, {
-    headers: {
-      Authorization: token || "",
-    },
-  });
-  setTodos(todos.filter((todo) => todo.id !== id));
+
+  try {
+    await axios.delete(`http://localhost:5000/todos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setTodos(todos.filter((todo) => todo.id !== id));
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error deleting task:",
+        error.response?.data || error.message
+      );
+    } else {
+      console.error("Unexpected error:", error);
+    }
+  }
 };
 
 export default handleDeleteTask;

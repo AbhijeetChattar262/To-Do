@@ -8,7 +8,7 @@ const toggleComplete = (req: Request, res: Response) => {
   const userId = req.user.id;
 
   db.query(
-    "UPDATE todos SET completed = NOT completed WHERE id = ? AND user_id = ?",
+    "UPDATE todos SET completed = NOT completed WHERE id = ? AND user_id_FK = ?",
     [id, userId],
     (err) => {
       if (err)

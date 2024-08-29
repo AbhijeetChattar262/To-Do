@@ -8,7 +8,7 @@ const getTodos = (req: Request, res: Response) => {
   const userId = req.user.id;
 
   db.query(
-    "SELECT * FROM todos WHERE user_id = ?",
+    "SELECT * FROM todos WHERE user_id_FK = ?",
     [userId],
     (err, results) => {
       if (err) return res.status(500).json({ message: "Error fetching tasks" });

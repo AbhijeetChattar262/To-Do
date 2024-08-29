@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../services/authServices";
-import { Form, Button, Container } from "react-bootstrap";
+import LoginForm from "../components/Login/LoginForm";
+import LoginHeader from "../components/Login/LoginHeader";
+import LoginContainer from "../components/Login/LoginContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Login: React.FC = () => {
@@ -13,56 +15,32 @@ const Login: React.FC = () => {
     handleLogin(e, username, password, navigate);
   };
 
+  const onRegister = () => {
+    navigate("/register");
+  };
+
+  useEffect(() => {
+    const isAuthenticated = !!localStorage.getItem("token");
+
+    if (isAuthenticated) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      navigate("/login", { replace: true });
+    }
+  }, [navigate]);
+
   return (
-    <Container
-      className="d-flex flex-column justify-content-center align-items-center"
-      style={{ height: "100vh" }}
-    >
-      <h2 className="mb-4 login-form">Login</h2>
-      <Form
+    <LoginContainer>
+      <LoginHeader />
+      <LoginForm
+        username={username}
+        password={password}
+        onUsernameChange={(e) => setUsername(e.target.value)}
+        onPasswordChange={(e) => setPassword(e.target.value)}
         onSubmit={onSubmit}
-        style={{
-          width: "100%",
-          maxWidth: "400px",
-          padding: "20px",
-          backgroundColor: "#f8f9fa",
-          borderRadius: "8px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit" className="w-100 mb-2">
-          Login
-        </Button>
-        <Button
-          variant="secondary"
-          type="button"
-          onClick={() => navigate("/register")}
-          className="w-100"
-        >
-          Register
-        </Button>
-      </Form>
-    </Container>
+        onRegister={onRegister}
+      />
+    </LoginContainer>
   );
 };
 

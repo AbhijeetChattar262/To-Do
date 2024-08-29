@@ -13,7 +13,6 @@ const handleLogin = async (
     const response = await axios.post("http://localhost:5000/login", {
       username,
       password,
-
     });
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("username", username);
