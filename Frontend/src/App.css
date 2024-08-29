@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: rgb(4, 97, 19);
+}
+
+.btn-violet {
+  background-color: violet;
+  border-color: violet;
+  color: white;
+}
+
+.btn-violet:hover {
+  background-color: darkviolet;
+  border-color: darkviolet;
+}
