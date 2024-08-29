@@ -20,7 +20,7 @@ const addTodo = (req: Request, res: Response) => {
         return res.status(500).json({ message: "Error adding task" });
       }
       res.status(201).json({
-        id: (result as mysql.OkPacket).insertId,
+        id: (result as mysql.ResultSetHeader).insertId,
         task,
         completed: false,
       });

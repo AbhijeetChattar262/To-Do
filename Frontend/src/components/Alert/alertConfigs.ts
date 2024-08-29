@@ -56,6 +56,16 @@ const alertConfigs: Record<string, SweetAlertOptions> = {
     confirmButtonText: "Yes, log out",
     cancelButtonText: "Cancel",
   },
+  deleteTask: {
+    icon: "warning",
+    title: "Delete Task",
+    text: "Are you sure you want to delete this task?",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete",
+    cancelButtonText: "Cancel",
+  },
 };
 
 export default alertConfigs;

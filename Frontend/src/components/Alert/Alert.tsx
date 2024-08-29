@@ -8,14 +8,15 @@ interface AlertProps {
     | "registerSuccess"
     | "registerFailed"
     | "taskCannotBeEmpty"
-    | "logout"; // Define all possible alert types
+    | "logout"
+    | "deleteTask"; // Define all possible alert types
   onConfirm?: () => void; // Optional callback for when the alert is confirmed
 }
 
 const Alert: React.FC<AlertProps> = ({ alertType, onConfirm }) => {
   const handleAlert = () => {
-    Swal.fire(alertConfigs[alertType]).then(() => {
-      if (onConfirm) {
+    Swal.fire(alertConfigs[alertType]).then((result) => {
+      if (result.isConfirmed && onConfirm) {
         onConfirm();
       }
     });
