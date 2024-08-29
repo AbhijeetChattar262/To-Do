@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
+import Alert from "../../components/Alert/Alert";
+
 
 const handleAddTask = async (
   newTask: string,
@@ -7,12 +9,24 @@ const handleAddTask = async (
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
   setNewTask: React.Dispatch<React.SetStateAction<string>>
 ) => {
+  // Trim the new task to remove any leading or trailing whitespace
+  const trimmedTask = newTask.trim();
+
+  // Check if the task is empty after trimming
+  if (!trimmedTask) {
+    Alert({
+      alertType: "taskCannotBeEmpty",
+    });
+    console.error("Task cannot be empty");
+    return;
+  }
+
   const token = localStorage.getItem("token");
 
   try {
     const response = await axios.post(
       "http://localhost:5000/todos",
-      { task: newTask },
+      { task: trimmedTask },
       {
         headers: {
           Authorization: `Bearer ${token}`,
