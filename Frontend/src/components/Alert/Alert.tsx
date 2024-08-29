@@ -7,6 +7,7 @@ interface AlertProps {
     | "authenticationFailed"
     | "registerSuccess"
     | "registerFailed"
+    | "taskCannotBeEmpty"
     | "logout"; // Define all possible alert types
   onConfirm?: () => void; // Optional callback for when the alert is confirmed
 }

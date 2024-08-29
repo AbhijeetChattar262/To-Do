@@ -37,7 +37,7 @@ User.init(
     {
         tableName: "users",
         sequelize,
-        timestamps: false, // Disable timestamps
+        timestamps: false, 
     }
 );
 

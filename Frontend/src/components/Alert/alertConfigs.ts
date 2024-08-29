@@ -37,6 +37,15 @@ const alertConfigs: Record<string, SweetAlertOptions> = {
     confirmButtonColor: "#3085d6",
     confirmButtonText: "Try Again",
   },
+  taskCannotBeEmpty: {
+    icon: "error",
+    title: "Task cannot be empty",
+    text: "Please enter a task.",
+    background: "#f8d7da",
+    color: "#721c24",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Try Again",
+  },
   logout: {
     icon: "info",
     title: "Logout",
