@@ -46,12 +46,13 @@ const TaskList: React.FC<TaskListProps> = ({
             <Button
               variant="info"
               onClick={() => handleEditTask(todo, setEditingTask, setNewTask)}
-              className="me-2"
+              className="me-2 my-1"
             >
               Edit
             </Button>
             <Button
               variant="danger"
+              className="me-2 my-1"
               onClick={() => handleDeleteTask(todo.id, setTodos, todos)}
             >
               Delete
