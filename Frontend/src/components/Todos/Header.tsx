@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { LOGOUT, YOUR_TASKS } from "../../constants/HEADINGS";
 
 interface HeaderProps {
   username: string | null;
@@ -13,15 +14,14 @@ const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
     minWidth: "200px", // Minimum width
     textAlign: "center" as "center", // TypeScript compatibility
     marginRight: "auto",
-    marginLeft: "0" // Align to the left
+    marginLeft: "0", // Align to the left
   };
 
   const welcomeTextStyle = {
     margin: "0",
     color: "#007bff", // Blue text color
-    fontFamily: "cursive" // Cursive font
+    fontFamily: "cursive", // Cursive font
   };
-
 
   return (
     <>
@@ -29,11 +29,11 @@ const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
         <div style={headerStyle}>
           <h3 style={welcomeTextStyle}>Welcome, {username}!</h3>
         </div>
-        <Button variant="danger"  className="me-2 mx-1" onClick={onLogout}>
-          Logout
+        <Button variant="danger" className="me-2 mx-1" onClick={onLogout}>
+          {LOGOUT}
         </Button>
       </div>
-      <h1 className="text-center">Your Todos</h1>
+      <h1 className="text-center">{YOUR_TASKS}</h1>
     </>
   );
 };

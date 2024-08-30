@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../../services/authServices";
+import { LOGIN, REGISTER } from "../../constants/HEADINGS";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -40,7 +41,7 @@ const LoginForm: React.FC = () => {
         />
       </Form.Group>
       <Button variant="primary" type="submit" className="w-100 mb-2">
-        Login
+        {LOGIN}
       </Button>
       <Button
         variant="secondary"
@@ -48,7 +49,7 @@ const LoginForm: React.FC = () => {
         onClick={() => navigate("/register")}
         className="w-100"
       >
-        Register
+        {REGISTER}
       </Button>
     </Form>
   );

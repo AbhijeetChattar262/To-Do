@@ -1,6 +1,7 @@
 import axios from "axios";
 import Alert from "../../components/Alert/Alert";
 import { NavigateFunction } from "react-router-dom";
+import { REGISTER_API_URL } from "../../constants/API_URLS";
 
 const handleRegister = async (
   username: string,
@@ -8,7 +9,7 @@ const handleRegister = async (
   navigate: NavigateFunction
 ) => {
   try {
-    await axios.post("http://localhost:5000/register", {
+    await axios.post(REGISTER_API_URL, {
       username,
       password,
     });

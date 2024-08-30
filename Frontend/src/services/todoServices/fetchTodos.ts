@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
+import { TODO_API_URL } from "../../constants/API_URLS";
 
 const fetchTodos = async (
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
@@ -7,7 +8,7 @@ const fetchTodos = async (
   const token = localStorage.getItem("token");
 
   try {
-    const response = await axios.get<Todo[]>("http://localhost:5000/todos", {
+    const response = await axios.get<Todo[]>(TODO_API_URL, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

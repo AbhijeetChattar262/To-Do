@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { handleRegister } from "../../services/authServices";
+import { REGISTER } from "../../constants/HEADINGS";
+import { ALREADY_REGISTERED } from "../../constants/MESSAGES";
 
 const RegisterForm: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -32,14 +34,14 @@ const RegisterForm: React.FC = () => {
         variant="primary"
         onClick={() => handleRegister(username, password, navigate)}
       >
-        Register
+        {REGISTER}
       </Button>
       <Button
         className="mt-3 w-100"
         variant="success"
         onClick={() => navigate("/login")}
       >
-        Already have an account? Login
+        {ALREADY_REGISTERED}
       </Button>
     </Form>
   );

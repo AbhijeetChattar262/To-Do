@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
 import Alert from "../../components/Alert/Alert";
-
+import { TODO_API_URL } from "../../constants/API_URLS";
 
 const handleAddTask = async (
   newTask: string,
@@ -25,7 +25,7 @@ const handleAddTask = async (
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/todos",
+      TODO_API_URL,
       { task: trimmedTask },
       {
         headers: {

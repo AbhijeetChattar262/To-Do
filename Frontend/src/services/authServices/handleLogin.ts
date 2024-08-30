@@ -1,6 +1,7 @@
 import Alert from "../../components/Alert/Alert";
 import axios from "axios";
 import { NavigateFunction } from "react-router-dom";
+import { LOGIN_API_URL } from "../../constants/API_URLS";
 
 const handleLogin = async (
   e: React.FormEvent,
@@ -10,7 +11,7 @@ const handleLogin = async (
 ) => {
   e.preventDefault();
   try {
-    const response = await axios.post("http://localhost:5000/login", {
+    const response = await axios.post(LOGIN_API_URL, {
       username,
       password,
     });

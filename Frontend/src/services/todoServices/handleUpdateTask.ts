@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
+import { TODO_API_URL } from "../../constants/API_URLS";
 
 const handleUpdateTask = async (
   editingTask: Todo | null,
@@ -13,7 +14,7 @@ const handleUpdateTask = async (
 
   const token = localStorage.getItem("token");
   await axios.put(
-    `http://localhost:5000/todos/${editingTask.id}`,
+    `${TODO_API_URL}/${editingTask.id}`,
     { task: newTask },
     {
       headers: {

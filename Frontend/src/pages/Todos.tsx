@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
 import Header from "../components/Todos/Header";
 import TaskList from "../components/Todos/TaskList";
+import { PENDING_TASK, COMPLETED_TASK } from "../constants/HEADINGS";
 
 const Todos: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -57,7 +58,7 @@ const Todos: React.FC = () => {
           />
           <Row>
             <Col>
-              <h3>Pending Tasks</h3>
+              <h3>{PENDING_TASK}</h3>
               <TaskList
                 todos={todos}
                 setTodos={setTodos}
@@ -67,7 +68,7 @@ const Todos: React.FC = () => {
               />
             </Col>
             <Col>
-              <h3>Completed Tasks</h3>
+              <h3>{COMPLETED_TASK}</h3>
               <TaskList
                 todos={todos}
                 setTodos={setTodos}

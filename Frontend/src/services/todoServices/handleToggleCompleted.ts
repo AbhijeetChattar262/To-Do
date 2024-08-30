@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
+import { TOGGLE_TODO_API_URL } from "../../constants/API_URLS";
 
 const handleToggleCompleted = async (
   id: number,
@@ -8,7 +9,7 @@ const handleToggleCompleted = async (
 ) => {
   const token = localStorage.getItem("token");
   await axios.put(
-    `http://localhost:5000/todos/toggle/${id}`,
+    `${TOGGLE_TODO_API_URL}/${id}`,
     {},
     {
       headers: {
