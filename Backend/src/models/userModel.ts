@@ -14,7 +14,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
     public username!: string;
     public password!: string;
 
-    // Timestamps are not defined
+   
 }
 
 User.init(
