@@ -2,13 +2,14 @@ import { Request, Response } from "express";
 import User from "../../models/userModel"; // Adjust path as needed
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { LOGIN_MESSAGES, JWT_SECRET } from "../../constants/AUTH/loginConstants"; // Adjust path as needed
 
 // User Login
 const loginUser = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).send("Credentials Needed");
+    return res.status(400).send(LOGIN_MESSAGES.CREDENTIALS_NEEDED);
   }
 
   try {
@@ -16,28 +17,28 @@ const loginUser = async (req: Request, res: Response) => {
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).json({ message: LOGIN_MESSAGES.USER_NOT_FOUND });
     }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: LOGIN_MESSAGES.INVALID_CREDENTIALS });
     }
 
     // Generate JWT token
     const token = jwt.sign(
       { id: user.id },
-      process.env.JWT_SECRET || "defaultSecret",
+      JWT_SECRET,
       { expiresIn: "1h" }
     );
 
     res.json({
-      message: "Login successful",
+      message: LOGIN_MESSAGES.LOGIN_SUCCESS,
       token,
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: LOGIN_MESSAGES.SERVER_ERROR });
   }
 };
 

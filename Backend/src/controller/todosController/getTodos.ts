@@ -1,13 +1,13 @@
-import { Request, Response } from 'express';
-import Todo from '../../models/todoModel'; // Adjust path as needed
+import { Request, Response } from "express";
+import Todo from "../../models/todoModel";
+import { MESSAGES } from "../../constants/TODO/todoConstants"; // Adjust path as needed
 
 const getTodos = async (req: Request, res: Response) => {
-  if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
+  if (!req.user) return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
 
   const userId = req.user.id;
 
   try {
-    // Fetch todos for the user
     const todos = await Todo.findAll({
       where: {
         user_id_FK: userId,
@@ -16,8 +16,8 @@ const getTodos = async (req: Request, res: Response) => {
 
     res.json(todos);
   } catch (err) {
-    console.error('Database Error:', err); // Debug output
-    res.status(500).json({ message: 'Error fetching tasks' });
+    console.error(MESSAGES.ERROR_FETCHING_TASKS, err); // Debug output
+    res.status(500).json({ message: MESSAGES.ERROR_FETCHING_TASKS });
   }
 };
 

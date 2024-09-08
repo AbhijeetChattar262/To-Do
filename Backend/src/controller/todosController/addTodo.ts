@@ -1,21 +1,21 @@
 import { Request, Response } from "express";
-import Todo from "../../models/todoModel"; // Adjust path as needed
+import Todo from "../../models/todoModel";
+import { MESSAGES } from "../../constants/TODO/todoConstants"; // Adjust path as needed
 
 const addTodo = async (req: Request, res: Response) => {
   if (!req.user) {
-    console.error("Unauthorized access attempt"); // Debug output
-    return res.status(401).json({ message: "Unauthorized" });
+    console.error(MESSAGES.UNAUTHORIZED); // Debug output
+    return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
   }
 
   const { task } = req.body;
   const userId = req.user.id;
 
   if (!task) {
-    return res.status(400).json({ message: "Task is required" });
+    return res.status(400).json({ message: MESSAGES.TASK_REQUIRED });
   }
 
   try {
-    // Create a new Todo entry using Sequelize
     const newTodo = await Todo.create({
       user_id_FK: userId,
       task,
@@ -28,8 +28,8 @@ const addTodo = async (req: Request, res: Response) => {
       completed: newTodo.completed,
     });
   } catch (err) {
-    console.error("Database Error:", err); // Debug output
-    res.status(500).json({ message: "Error adding task" });
+    console.error(MESSAGES.ERROR_ADDING_TASK, err); // Debug output
+    res.status(500).json({ message: MESSAGES.ERROR_ADDING_TASK });
   }
 };
 
