@@ -1,20 +1,21 @@
 import { Request, Response } from "express";
 import User from "../../models/userModel"; // Adjust path as needed
 import bcrypt from "bcrypt";
+import { REGISTER_MESSAGES } from "../../constants/AUTH/registerConstants";
 
 // User Register
 const registerUser = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).send("Credentials Needed");
+    return res.status(400).send(REGISTER_MESSAGES.CREDENTIALS_NEEDED);
   }
 
   try {
     // Check if user already exists
     const existingUser = await User.findOne({ where: { username } });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ message: REGISTER_MESSAGES.USER_ALREADY_EXISTS });
     }
 
     // Hash the password
@@ -25,8 +26,8 @@ const registerUser = async (req: Request, res: Response) => {
 
     res.status(201).json({ id: user.id, username: user.username });
   } catch (err) {
-    console.error('Error registering user:', err);
-    res.status(500).json({ message: "Error registering user" });
+    console.error(REGISTER_MESSAGES.ERROR_REGISTERING_USER," ", err);
+    res.status(500).json({ message: REGISTER_MESSAGES.ERROR_REGISTERING_USER });
   }
 };
 
