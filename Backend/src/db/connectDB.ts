@@ -34,4 +34,12 @@ sequelize.authenticate()
     console.error(DB_MESSAGES.CONNECTION_ERROR, err);
   });
 
+  
+// Synchronize the models with the database
+sequelize.sync({ alter: true }).then(() => {
+  console.log(DB_MESSAGES.TABLES_CREATED_OR_UPDATED);
+}).catch((error) => {
+  console.error(DB_MESSAGES.SYNC_ERROR, error);
+});
+
 export default sequelize;
