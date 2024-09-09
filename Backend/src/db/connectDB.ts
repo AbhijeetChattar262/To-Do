@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 import * as dotenv from 'dotenv';
-import { DB_MESSAGES, DB_DEFAULTS } from '../constants/DB/dbConstants'; // Adjust path as needed
+import { DB_MESSAGES, DB_DEFAULTS } from '../constants/DB/dbConstants'; 
 
 dotenv.config();
 

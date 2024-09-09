@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import User from "../../models/userModel"; // Adjust path as needed
+import User from "../../models/userModel"; 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { LOGIN_MESSAGES, JWT_SECRET } from "../../constants/AUTH/loginConstants"; // Adjust path as needed
+import { LOGIN_MESSAGES, JWT_SECRET } from "../../constants/AUTH/loginConstants";
 
 // User Login
 const loginUser = async (req: Request, res: Response) => {

@@ -10,17 +10,17 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
   const headerStyle = {
     padding: "10px",
-    display: "inline-block", // Adjust width to fit content
-    minWidth: "200px", // Minimum width
-    textAlign: "center" as "center", // TypeScript compatibility
+    display: "inline-block", 
+    minWidth: "200px",
+    textAlign: "center" as "center", 
     marginRight: "auto",
-    marginLeft: "0", // Align to the left
+    marginLeft: "0",
   };
 
   const welcomeTextStyle = {
     margin: "0",
-    color: "#007bff", // Blue text color
-    fontFamily: "cursive", // Cursive font
+    color: "#007bff", 
+    fontFamily: "cursive",
   };
 
   return (
