@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import User from "../../models/userModel"; // Adjust path as needed
+import User from "../../models/userModel";
 import bcrypt from "bcrypt";
 import { REGISTER_MESSAGES } from "../../constants/AUTH/registerConstants";
 

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { AUTH_MESSAGES, AUTH_HEADERS, AUTH_PREFIXES, AUTH_DEFAULTS } from "../constants/MIDDLEWARE/middlewareConstants"; // Adjust path as needed
+import { AUTH_MESSAGES, AUTH_HEADERS, AUTH_PREFIXES, AUTH_DEFAULTS } from "../constants/MIDDLEWARE/middlewareConstants"; 
 
 // Middleware to verify token
 export const verifyToken = (
