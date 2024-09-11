@@ -1,4 +1,4 @@
-# Todo App
+# Magic Todo App
 
 ## Description
 
