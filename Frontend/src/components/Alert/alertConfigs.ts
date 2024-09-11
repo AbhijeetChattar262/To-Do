@@ -19,6 +19,25 @@ const alertConfigs: Record<string, SweetAlertOptions> = {
     confirmButtonColor: "#3085d6",
     confirmButtonText: "Try Again",
   },
+  invalidPassword: {
+    icon: "error",
+    title: "Invalid Password",
+    text: "Username must have at least 4 characters. Only letters and numbers are allowed.",
+    background: "#fff3cd",  // Light yellow
+    color: "#856404",       // Dark gold text
+    confirmButtonColor: "#ffc107",  // Yellow button
+    confirmButtonText: "Fix Password",
+  },
+  invalidUsername: {
+    icon: "error",
+    title: "Invalid Username",
+    text: "Password must be at least 6 characters long, with at least 1 uppercase letter, 1 number & 1 special character.",
+    background: "#d1ecf1",  // Light blue
+    color: "#0c5460",       // Dark blue text
+    confirmButtonColor: "#17a2b8",  // Blue button
+    confirmButtonText: "Fix Username",
+  },
+  
   registerSuccess: {
     icon: "success",
     title: "Registration Successful",
