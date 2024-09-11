@@ -1,15 +1,8 @@
 import { Request, Response } from "express";
+import User from "../../models/userModel"; 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { MysqlSequelizeAdapter } from "../../db/Mysql/MysqlDbAdapter";
-import { DbModelsEnum } from "../../db/enums";
 import { LOGIN_MESSAGES, JWT_SECRET } from "../../constants/AUTH/loginConstants";
-import { UserAttributes } from "../../db/Types/UserType"; // Adjust this path as necessary
-
-// Type guard to check if an object is UserAttributes
-function isUserAttributes(obj: any): obj is UserAttributes {
-  return obj && typeof obj.id === 'number' && typeof obj.username === 'string' && typeof obj.password === 'string';
-}
 
 // User Login
 const loginUser = async (req: Request, res: Response) => {
@@ -20,29 +13,22 @@ const loginUser = async (req: Request, res: Response) => {
   }
 
   try {
-    const adapter = MysqlSequelizeAdapter.getInstance();
+    // Query user by username using Sequelize
+    const user = await User.findOne({ where: { username } });
 
-    // Query user by username using MysqlSequelizeAdapter
-    const userRecord = await adapter.findOne(DbModelsEnum.USERS, { where: { username } });
-
-    if (!userRecord) {
+    if (!user) {
       return res.status(400).json({ message: LOGIN_MESSAGES.USER_NOT_FOUND });
     }
 
-    // Use type guard to ensure userRecord conforms to UserAttributes
-    if (!isUserAttributes(userRecord)) {
-      return res.status(500).json({ message: LOGIN_MESSAGES.SERVER_ERROR });
-    }
-
     // Compare password
-    const isMatch = await bcrypt.compare(password, userRecord.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: LOGIN_MESSAGES.INVALID_CREDENTIALS });
     }
 
     // Generate JWT token
     const token = jwt.sign(
-      { id: userRecord.id },
+      { id: user.id },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -52,7 +38,6 @@ const loginUser = async (req: Request, res: Response) => {
       token,
     });
   } catch (err) {
-    console.error("Error during login:", err); // Improved error logging
     res.status(500).json({ message: LOGIN_MESSAGES.SERVER_ERROR });
   }
 };
