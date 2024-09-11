@@ -1,4 +1,4 @@
-# Magic Todo App
+# Magic Software To Do App
 
 ## Description
 
