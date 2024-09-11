@@ -32,6 +32,7 @@ const RegisterForm: React.FC = () => {
       <Button
         className="mt-4 w-100"
         variant="primary"
+        type="submit"
         onClick={() => handleRegister(username, password, navigate)}
       >
         {REGISTER}

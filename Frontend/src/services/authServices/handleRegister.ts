@@ -9,28 +9,30 @@ const handleRegister = async (
   password: string,
   navigate: NavigateFunction
 ) => {  
-  if(isUsernameValid(username)){
-    if(isPasswordValid(password)){
-      try {
-        await axios.post(REGISTER_API_URL, {
-          username,
-          password,
-        });
-        Alert({
-          alertType: "registerSuccess",
-          onConfirm: () => navigate("/login"), // Navigate after confirmation
-        });
-      } catch (err: any) {
-        Alert({ alertType: "registerFailed" });
-    
+  if (username.trim() !== "" && password.trim() !== "") {
+    if(isUsernameValid(username)){
+      if(isPasswordValid(password)){
+        try {
+          await axios.post(REGISTER_API_URL, {
+            username,
+            password,
+          });
+          Alert({
+            alertType: "registerSuccess",
+            onConfirm: () => navigate("/login"), // Navigate after confirmation
+          });
+        } catch (err: any) {
+          Alert({ alertType: "registerFailed" });
+      
+        }
+      }
+      else{
+        Alert({alertType:"invalidPassword"});
       }
     }
     else{
-      Alert({alertType:"invalidPassword"});
+      Alert({alertType:"invalidUsername"});
     }
-  }
-  else{
-    Alert({alertType:"invalidUsername"});
   }
   
 };
