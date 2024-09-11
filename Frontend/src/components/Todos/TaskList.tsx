@@ -6,7 +6,6 @@ import {
   handleEditTask,
   handleToggleCompleted,
 } from "../../services/todoServices";
-import { getTaskSuggestions } from "../../utils/geminiApi"; // Import the Gemini API function
 
 interface TaskListProps {
   todos: Todo[];
@@ -23,24 +22,8 @@ const TaskList: React.FC<TaskListProps> = ({
   setEditingTask,
   completed,
 }) => {
-  const [suggestions, setSuggestions] = useState<string[]>([]); // Store suggestions
   const [showModal, setShowModal] = useState(false); // For displaying suggestions in a modal
   const [currentTask, setCurrentTask] = useState<string | null>(null); // Track current task being edited
-
-  // API Key should be passed from process.env or securely managed in your environment
-  const apiKey = import.meta.env.VITE_APP_GEMINI_API_KEY || ""; 
-
-  const handleGetSuggestions = async (task: string) => {
-    setCurrentTask(task);
-    try {
-      const response = await getTaskSuggestions(task, apiKey); // Get suggestions using API
-      setSuggestions(response);
-    } catch (error) {
-      console.error("Failed to fetch suggestions:", error);
-      setSuggestions(["No suggestions available at this time."]);
-    }
-    setShowModal(true); // Show modal with suggestions
-  };
 
   const filteredTodos = todos.filter((todo) => todo.completed === completed);
 
@@ -61,7 +44,6 @@ const TaskList: React.FC<TaskListProps> = ({
               />
               <div>
                 <div>{todo.task}</div>
-                
               </div>
             </div>
             <div>
@@ -79,11 +61,7 @@ const TaskList: React.FC<TaskListProps> = ({
               >
                 Delete
               </Button>
-              <Button
-                variant="warning"
-                className="me-2 my-1"
-                onClick={() => handleGetSuggestions(todo.task)} // Get suggestions for this task
-              >
+              <Button variant="warning" className="me-2 my-1">
                 Get Suggestions
               </Button>
             </div>
@@ -98,7 +76,9 @@ const TaskList: React.FC<TaskListProps> = ({
         </Modal.Header>
         <Modal.Body>
           {suggestions.length > 0 ? (
-            <div dangerouslySetInnerHTML={{ __html: suggestions.join('<br/>') }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: suggestions.join("<br/>") }}
+            />
           ) : (
             <p>No suggestions available.</p>
           )}
