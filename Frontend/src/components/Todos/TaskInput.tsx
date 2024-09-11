@@ -27,6 +27,7 @@ const TaskInput: React.FC<TaskInputProps> = ({
       </Form.Group>
       <Button
         variant={editingTask ? "warning" : "primary"}
+        type="submit"
         onClick={onSubmit}
         className="mt-2"
       >
