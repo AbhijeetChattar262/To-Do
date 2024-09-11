@@ -5,6 +5,8 @@ interface AlertProps {
   alertType:
     | "loginSuccess"
     | "authenticationFailed"
+    | "invalidPassword"
+    | "invalidUsername"
     | "registerSuccess"
     | "registerFailed"
     | "taskCannotBeEmpty"
