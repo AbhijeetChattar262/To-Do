@@ -1,29 +1,18 @@
 import { Request, Response } from "express";
-import { MysqlSequelizeAdapter } from "../../db/Mysql/MysqlDbAdapter";
-import { DbModelsEnum } from "../../db/enums";
 import { MESSAGES } from "../../constants/TODO/todoConstants";
-
+import { DeleteTodoService } from "../../services/DeleteTodoService";
 const deleteTodo = async (req: Request, res: Response) => {
   // Check if the user is authorized
   if (!req.user) return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
 
   const { id } = req.params;
   const userId = req.user.id;
-
   try {
-    // Instantiate the MySQL adapter
-    const adapter = MysqlSequelizeAdapter.getInstance();
+    // Use the service to delete the Todo item
+    const isDeleted = await  DeleteTodoService.deleteTodo(Number(id), userId);
 
-    // Use the adapter to delete the todo by id and user_id_FK
-    const result = await adapter.destroy(DbModelsEnum.TODOS, {
-      where: {
-        id,
-        user_id_FK: userId,
-      },
-    });
-
-    // If no todo is deleted, return a 404 error
-    if (result ===0) {
+    // If the todo was not found, return a 404 error
+    if (!isDeleted) {
       return res.status(404).json({ message: MESSAGES.TASK_NOT_FOUND });
     }
 

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { MysqlSequelizeAdapter } from "../../db/Mysql/MysqlDbAdapter";
-import { DbModelsEnum } from "../../db/enums";
 import { MESSAGES } from "../../constants/TODO/todoConstants";
+import { GetTodoService } from "../../services/GetTodoServices"; 
 
 const getTodos = async (req: Request, res: Response) => {
   // Check if the user is authorized
@@ -10,15 +9,8 @@ const getTodos = async (req: Request, res: Response) => {
   const userId = req.user.id;
 
   try {
-    // Instantiate the MySQL adapter
-    const adapter = MysqlSequelizeAdapter.getInstance();
-
-    // Fetch todos from the database using the adapter
-    const todos = await adapter.findAll(DbModelsEnum.TODOS, {
-      where: {
-        user_id_FK: userId,
-      },
-    });
+    // Use the service to fetch todos
+    const todos = await GetTodoService.getTodos(userId);
 
     // Return the todos
     res.json(todos);

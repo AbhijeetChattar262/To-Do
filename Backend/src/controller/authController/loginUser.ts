@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AuthService } from "../../services/AuthService";
+import { LoginService } from "../../services/LoginService";
 import { LOGIN_MESSAGES } from "../../constants/AUTH/loginConstants";
 
 const loginUser = async (req: Request, res: Response) => {
@@ -10,7 +10,7 @@ const loginUser = async (req: Request, res: Response) => {
   }
 
   try {
-    const token = await AuthService.login(username, password);
+    const token = await LoginService.login(username, password);
     if (token) {
       res.json({ message: LOGIN_MESSAGES.LOGIN_SUCCESS, token });
     } else {

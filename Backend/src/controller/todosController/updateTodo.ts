@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { MysqlSequelizeAdapter } from "../../db/Mysql/MysqlDbAdapter";
-import { DbModelsEnum } from "../../db/enums";
 import { MESSAGES } from "../../constants/TODO/todoConstants";
+import { UpdateService } from "../../services/UpdateService";
 
 const updateTodo = async (req: Request, res: Response) => {
   if (!req.user) return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
@@ -11,43 +10,14 @@ const updateTodo = async (req: Request, res: Response) => {
   const userId = req.user.id;
 
   try {
-    // Instantiate the MySQL adapter
-    const adapter = MysqlSequelizeAdapter.getInstance();
+    // Call the UpdateService to update the todo
+    const updatedTodo = await UpdateService.updateTodoTask(Number(id), userId, task);
 
-    // Find the todo item using the adapter
-    const todo = await adapter.findOne(DbModelsEnum.TODOS, {
-      where: {
-        id,
-        user_id_FK: userId,
-      },
-    });
-
-    if (!todo) {
+    if (!updatedTodo) {
       return res.status(404).json({ message: MESSAGES.TODO_NOT_FOUND });
     }
 
-    // Update the todo item
-    const result = await adapter.update(DbModelsEnum.TODOS, { 
-      task 
-    }, {
-      where: {
-        id,
-        user_id_FK: userId,
-      },
-    });
-
-    if (result === 0) {
-      return res.status(404).json({ message: MESSAGES.TODO_NOT_FOUND });
-    }
-
-    // Fetch the updated todo to return
-    const updatedTodo = await adapter.findOne(DbModelsEnum.TODOS, {
-      where: {
-        id,
-        user_id_FK: userId,
-      },
-    });
-
+    // Return the updated todo
     res.json(updatedTodo);
   } catch (err) {
     // Log the error and send a 500 error response

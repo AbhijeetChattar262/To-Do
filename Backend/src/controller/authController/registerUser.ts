@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import { MysqlSequelizeAdapter } from "../../db/Mysql/MysqlDbAdapter";
-import { DbModelsEnum } from "../../db/enums";
-import { UserAttributes } from "../../db/Types/UserType"; // Ensure this path is correct
+import { RegisterService  } from "../../services/RegisterService";
 import { REGISTER_MESSAGES } from "../../constants/AUTH/registerConstants";
-import { Model } from "sequelize";
 
 const registerUser = async (req: Request, res: Response) => {
   const { username, password } = req.body;
@@ -15,36 +11,17 @@ const registerUser = async (req: Request, res: Response) => {
   }
 
   try {
-    // Instantiate the MySQL adapter
-    const adapter = MysqlSequelizeAdapter.getInstance();
+    const newUser = await RegisterService.register(username, password);
 
-    // Check if user already exists
-    const existingUser = await adapter.findOne(DbModelsEnum.USERS, {
-      where: { username },
+    res.status(201).json({
+      id: newUser?.id,
+      username: newUser?.username,
     });
-
-    if (existingUser) {
+  } catch (err : any) {
+    if (err.message === REGISTER_MESSAGES.USER_ALREADY_EXISTS) {
       return res.status(400).json({ message: REGISTER_MESSAGES.USER_ALREADY_EXISTS });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create a new user and cast it to Model<UserAttributes>
-    const newUser = await adapter.create(DbModelsEnum.USERS, {
-      username,
-      password: hashedPassword,
-    }) as Model<UserAttributes>;
-
-    // Extract the user data from the Sequelize model instance
-    const userData = newUser.get({ plain: true }) as UserAttributes;
-
-    // Return the newly created user data
-    res.status(201).json({
-      id: userData.id,
-      username: userData.username,
-    });
-  } catch (err) {
     console.error(REGISTER_MESSAGES.ERROR_REGISTERING_USER, err);
     res.status(500).json({ message: REGISTER_MESSAGES.ERROR_REGISTERING_USER });
   }
