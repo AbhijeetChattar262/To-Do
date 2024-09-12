@@ -5,10 +5,12 @@ import { REGISTER_API_URL } from "../../constants/API_URLS";
 import { isPasswordValid, isUsernameValid } from "../../helpers/username_passwordValidateHelper";
 
 const handleRegister = async (
+  e: React.FormEvent,
   username: string,
   password: string,
   navigate: NavigateFunction
 ) => {  
+  e.preventDefault();
   if (username.trim() !== "" && password.trim() !== "") {
     if(isUsernameValid(username)){
       if(isPasswordValid(password)){
