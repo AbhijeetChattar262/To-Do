@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyToken } from "../middleware/verifyToken";
+import { AuthMiddleware } from "../middleware/auth.middlewares";
 import {
   addTodo,
   deleteTodo,
@@ -11,10 +11,14 @@ import {
 const todosRouter = Router();
 
 // Todo Routes
-todosRouter.post("/todos", verifyToken, addTodo);
-todosRouter.get("/todos", verifyToken, getTodos);
-todosRouter.put("/todos/:id", verifyToken, updateTodo);
-todosRouter.delete("/todos/:id", verifyToken, deleteTodo);
-todosRouter.put("/todos/toggle/:id", verifyToken, toggleComplete);
+todosRouter.post("/todos", AuthMiddleware.authenticateUser, addTodo);
+todosRouter.get("/todos", AuthMiddleware.authenticateUser, getTodos);
+todosRouter.put("/todos/:id", AuthMiddleware.authenticateUser, updateTodo);
+todosRouter.delete("/todos/:id", AuthMiddleware.authenticateUser, deleteTodo);
+todosRouter.put(
+  "/todos/toggle/:id",
+  AuthMiddleware.authenticateUser,
+  toggleComplete
+);
 
 export default todosRouter;
