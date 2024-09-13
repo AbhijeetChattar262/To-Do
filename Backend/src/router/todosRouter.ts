@@ -1,24 +1,14 @@
 import { Router } from "express";
 import { AuthMiddleware } from "../middleware/auth.middlewares";
-import {
-  addTodo,
-  deleteTodo,
-  updateTodo,
-  getTodos,
-  toggleComplete,
-} from "../controller/todosController";
+import TodoController from "../controller/TodosController";
 
 const todosRouter = Router();
 
 // Todo Routes
-todosRouter.post("/todos", AuthMiddleware.authenticateUser, addTodo);
-todosRouter.get("/todos", AuthMiddleware.authenticateUser, getTodos);
-todosRouter.put("/todos/:id", AuthMiddleware.authenticateUser, updateTodo);
-todosRouter.delete("/todos/:id", AuthMiddleware.authenticateUser, deleteTodo);
-todosRouter.put(
-  "/todos/toggle/:id",
-  AuthMiddleware.authenticateUser,
-  toggleComplete
-);
+todosRouter.post("/todos", AuthMiddleware.authenticateUser, TodoController.addTodo);
+todosRouter.get("/todos", AuthMiddleware.authenticateUser, TodoController.getTodos);
+todosRouter.put("/todos/:id", AuthMiddleware.authenticateUser, TodoController.updateTodo);
+todosRouter.delete("/todos/:id", AuthMiddleware.authenticateUser, TodoController.deleteTodo);
+todosRouter.put("/todos/toggle/:id",AuthMiddleware.authenticateUser,TodoController.toggleComplete);
 
 export default todosRouter;
