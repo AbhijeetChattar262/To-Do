@@ -26,7 +26,9 @@ const Todos: React.FC = () => {
     fetchTodos(setTodos);
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent page refresh
+  
     if (editingTask) {
       handleUpdateTask(
         editingTask,
@@ -40,7 +42,6 @@ const Todos: React.FC = () => {
       handleAddTask(newTask, todos, setTodos, setNewTask);
     }
   };
-
   const handleUserLogout = () => {
     handleLogout(navigate);
   };
@@ -53,7 +54,7 @@ const Todos: React.FC = () => {
           <TaskInput
             newTask={newTask}
             setNewTask={setNewTask}
-            onSubmit={handleSubmit}
+            onSubmit=  {handleSubmit}
             editingTask={!!editingTask}
           />
           <Row>
