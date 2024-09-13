@@ -32,7 +32,7 @@ export class AuthMiddleware {
         : null;
 
     if (!token)
-      return res.status(401).json({ message: AUTH_MESSAGES.ACCESS_DENIED });
+      return res.status(401).json({ message: AUTH_MESSAGES.UNAUTHORIZED });
 
     try {
       const verified = jwt.verify(
@@ -42,7 +42,7 @@ export class AuthMiddleware {
       req.user = verified as { id: number };
       next();
     } catch (err) {
-      res.status(400).json({ message: AUTH_MESSAGES.INVALID_TOKEN });
+      res.status(401).json({ message: AUTH_MESSAGES.UNAUTHORIZED });
     }
   }
 }
