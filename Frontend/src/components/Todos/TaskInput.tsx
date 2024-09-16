@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 interface TaskInputProps {
   newTask: string;
   setNewTask: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: () => void;
   editingTask: boolean;
 }
 
@@ -15,7 +15,6 @@ const TaskInput: React.FC<TaskInputProps> = ({
   editingTask,
 }) => {
   return (
-   
     <Form className="mb-4 mt-3">
       <Form.Group controlId="formTask">
         <Form.Control

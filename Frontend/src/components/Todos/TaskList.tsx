@@ -29,19 +29,14 @@ const TaskList: React.FC<TaskListProps> = ({
           key={todo.id}
           className="d-flex justify-content-between align-items-center"
         >
-          <div className="form-check">
-            <input
+          <div>
+            <Form.Check
               type="checkbox"
-              className="form-check-input border-dark"
-              id="customCheck1"
               checked={todo.completed}
               onChange={() => handleToggleCompleted(todo.id, setTodos, todos)}
             />
-            <label className="form-check-label" htmlFor="customCheck1">
-              {todo.task}
-            </label>
+            {todo.task}
           </div>
-
           <div>
             <Button
               variant="info"
