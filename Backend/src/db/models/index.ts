@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize";
-import sequelize from "../db/connectDB";  // Assuming this exports the Sequelize instance
-import { UserDbModel } from "./UserModel";
-import { TodoDbModel } from "./TodoModel";
+import sequelize from "../connect-db";  // Assuming this exports the Sequelize instance
+import { UserDbModel } from "./user.model";
+import { TodoDbModel } from "./todo.model";
 
 export class DbModels {
     private static _instance: DbModels;
