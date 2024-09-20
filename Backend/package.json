@@ -1,4 +1,14 @@
 {
+  "name": "todo-app-backend",
+  "version": "1.0.0",
+  "description": "Backend for a Todo app built with Node.js, Express, and MySQL",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --project",
+    "dev": "ts-node-dev --respawn src/server.ts"
+  },
+  "author": "Abhijeet Chattar",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -10,11 +20,6 @@
     "mysql2": "^3.11.0",
     "path": "^0.12.7",
     "sequelize": "^6.37.3"
-  },
-  "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node dist/server.js",
-    "dev": "ts-node-dev --respawn src/server.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
