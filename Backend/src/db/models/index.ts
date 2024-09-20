@@ -9,16 +9,11 @@ export class DbModels {
     private static _user : any;
     private static _todo : any;
 
-    // Private constructor to enforce singleton pattern
     private constructor() {
-        // Initialize models
         DbModels._user = UserDbModel.getModel(sequelize, DataTypes);
         DbModels._todo = TodoDbModel.getModel(sequelize, DataTypes);
 
-        // Define model relationships here if necessary
-        // Example:
-        // DbModels._user.hasMany(DbModels._todo, { foreignKey: 'userId' });
-        // DbModels._todo.belongsTo(DbModels._user, { foreignKey: 'userId' });
+        
     }
 
     public static getInstance(): DbModels {

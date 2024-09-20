@@ -4,7 +4,7 @@ import { DB_MESSAGES, DB_DEFAULTS } from '../constants/DB/dbConstants';
 
 dotenv.config();
 
-// Check if required environment variables are set
+
 const {
   DB_DIALECT,
   DB_HOST,
@@ -21,11 +21,10 @@ export const sequelize = new Sequelize({
   dialect: DB_DIALECT as typeof DB_DEFAULTS.DIALECT,
   host: DB_HOST,
   username: DB_USER,
-  password: DB_PASSWORD || DB_DEFAULTS.PASSWORD, // Fallback to 'root' if DB_PASSWORD is not set
+  password: DB_PASSWORD || DB_DEFAULTS.PASSWORD, 
   database: DB_NAME,
 });
 
-// Test the connection
 sequelize.authenticate()
   .then(() => {
     console.log(DB_MESSAGES.CONNECTION_SUCCESS);
@@ -35,7 +34,6 @@ sequelize.authenticate()
   });
 
   
-// Synchronize the models with the database
 sequelize.sync({ alter: true }).then(() => {
   console.log(DB_MESSAGES.TABLES_CREATED_OR_UPDATED);
 }).catch((error) => {
