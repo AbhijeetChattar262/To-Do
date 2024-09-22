@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Todo } from "../interface/Todo";
@@ -11,8 +11,11 @@ import { handleLogout } from "../services/authServices";
 import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
 import Header from "../components/Todos/Header";
-import TaskList from "../components/Todos/TaskList";
 import { PENDING_TASK, COMPLETED_TASK } from "../constants/LABELS";
+import LoadingSpinner from "../components/Spinner/LoadingSpinner";
+
+// Lazy load TaskList
+const TaskList = React.lazy(() => import("../components/Todos/TaskList"));
 
 const Todos: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -26,7 +29,7 @@ const Todos: React.FC = () => {
     fetchTodos(setTodos);
   }, []);
 
-  const handleSubmit = (e:React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingTask) {
       handleUpdateTask(
@@ -60,23 +63,27 @@ const Todos: React.FC = () => {
           <Row>
             <Col>
               <h3>{PENDING_TASK}</h3>
-              <TaskList
-                todos={todos}
-                setTodos={setTodos}
-                setNewTask={setNewTask}
-                setEditingTask={setEditingTask}
-                completed={false}
-              />
+              <Suspense fallback={<LoadingSpinner/>}>
+                <TaskList
+                  todos={todos}
+                  setTodos={setTodos}
+                  setNewTask={setNewTask}
+                  setEditingTask={setEditingTask}
+                  completed={false}
+                />
+              </Suspense>
             </Col>
             <Col>
               <h3>{COMPLETED_TASK}</h3>
-              <TaskList
-                todos={todos}
-                setTodos={setTodos}
-                setNewTask={setNewTask}
-                setEditingTask={setEditingTask}
-                completed={true}
-              />
+              <Suspense fallback={<LoadingSpinner/>}>
+                <TaskList
+                  todos={todos}
+                  setTodos={setTodos}
+                  setNewTask={setNewTask}
+                  setEditingTask={setEditingTask}
+                  completed={true}
+                />
+              </Suspense>
             </Col>
           </Row>
         </Col>

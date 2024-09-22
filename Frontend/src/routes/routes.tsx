@@ -1,10 +1,12 @@
+import React,{Suspense} from "react";
 import { Route } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Todos from "../pages/Todos";
 import AuthGuard from "../components/AuthGuard";
 import NotFound from "../components/NotFound";
+import LoadingSpinner from "../components/Spinner/LoadingSpinner";
 
+const Todos= React.lazy(() => import("../pages/Todos"));
 const routes = (
   <>
     <Route path="/login" element={<Login />} />
@@ -13,7 +15,9 @@ const routes = (
       path="/todos"
       element={
         <AuthGuard>
+        <Suspense fallback={<LoadingSpinner />}>
           <Todos />
+        </Suspense>
         </AuthGuard>
       }
     />
