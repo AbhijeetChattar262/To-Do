@@ -1,11 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { LOGOUT, YOUR_TASKS } from "../../constants/HEADINGS";
-
-interface HeaderProps {
-  username: string | null;
-  onLogout: () => void;
-}
+import { HeaderProps } from "../../interface/Todo";
 
 const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
   const headerStyle = {

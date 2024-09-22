@@ -1,10 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-
-interface LoginContainerProps {
-  children: React.ReactNode;
-}
-
+import { LoginContainerProps} from "../../interface/Auth";
 const LoginContainer: React.FC<LoginContainerProps> = ({ children }) => {
   return (
     <Container

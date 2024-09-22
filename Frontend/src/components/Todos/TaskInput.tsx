@@ -1,12 +1,7 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import { TaskInputProps } from "../../interface/Todo";
 
-interface TaskInputProps {
-  newTask: string;
-  setNewTask: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: () => void;
-  editingTask: boolean;
-}
 
 const TaskInput: React.FC<TaskInputProps> = ({
   newTask,

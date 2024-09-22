@@ -1,19 +1,6 @@
 import Swal from "sweetalert2";
 import alertConfigs from "./alertConfigs";
-
-interface AlertProps {
-  alertType:
-    | "loginSuccess"
-    | "authenticationFailed"
-    | "invalidPassword"
-    | "invalidUsername"
-    | "registerSuccess"
-    | "registerFailed"
-    | "taskCannotBeEmpty"
-    | "logout"
-    | "deleteTask"; // Define all possible alert types
-  onConfirm?: () => void; // Optional callback for when the alert is confirmed
-}
+import AlertProps  from "../../interface/Alert";
 
 const Alert: React.FC<AlertProps> = ({ alertType, onConfirm }) => {
   const handleAlert = () => {

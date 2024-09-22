@@ -1,9 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
-interface RegisterContainerProps {
-  children: React.ReactNode;
-}
+import { RegisterContainerProps } from "../../interface/Auth";
 
 const RegisterContainer: React.FC<RegisterContainerProps> = ({ children }) => {
   return (

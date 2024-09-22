@@ -1,18 +1,10 @@
 import { Button, Form, ListGroup } from "react-bootstrap";
-import { Todo } from "../../interface/Todo";
 import {
   handleDeleteTask,
   handleEditTask,
   handleToggleCompleted,
 } from "../../services/todoServices";
-
-interface TaskListProps {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  setNewTask: React.Dispatch<React.SetStateAction<string>>;
-  setEditingTask: React.Dispatch<React.SetStateAction<Todo | null>>;
-  completed: any;
-}
+import { TaskListProps } from "../../interface/Todo";
 
 const TaskList: React.FC<TaskListProps> = ({
   todos,
