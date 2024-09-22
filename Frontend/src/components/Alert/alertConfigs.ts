@@ -47,6 +47,16 @@ const alertConfigs: Record<string, SweetAlertOptions> = {
     confirmButtonColor: "#3085d6",
     confirmButtonText: "Login",
   },
+  userAlreadyExists: {
+    icon: "error",
+    title: "Username Already Exists",
+    text: "Please choose a different username.",
+    background: "#f8d7da",
+    color: "#721c24",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Try Again",
+  }
+  ,
   registerFailed: {
     icon: "error",
     title: "Registration Failed",

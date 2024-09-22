@@ -5,6 +5,7 @@ interface AlertProps {
       | "invalidPassword"
       | "invalidUsername"
       | "registerSuccess"
+      | "userAlreadyExists"
       | "registerFailed"
       | "taskCannotBeEmpty"
       | "logout"
