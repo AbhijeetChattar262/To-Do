@@ -5,6 +5,7 @@ import {
   handleToggleCompleted,
 } from "../../services/todoServices";
 import { TaskListProps } from "../../interface/Todo";
+import { EDIT_LABEL, DELETE_LABEL } from "../../constants/LABELS";
 
 const TaskList: React.FC<TaskListProps> = ({
   todos,
@@ -35,14 +36,14 @@ const TaskList: React.FC<TaskListProps> = ({
               onClick={() => handleEditTask(todo, setEditingTask, setNewTask)}
               className="me-2 my-1"
             >
-              Edit
+              {EDIT_LABEL}
             </Button>
             <Button
               variant="danger"
               className="me-2 my-1"
               onClick={() => handleDeleteTask(todo.id, setTodos, todos)}
             >
-              Delete
+              {DELETE_LABEL}
             </Button>
           </div>
         </ListGroup.Item>

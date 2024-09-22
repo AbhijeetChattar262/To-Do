@@ -1,7 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { LOGOUT, YOUR_TASKS } from "../../constants/HEADINGS";
+import { LOGOUT, YOUR_TASKS } from "../../constants/LABELS";
 import { HeaderProps } from "../../interface/Todo";
+import { WELCOME} from "../../constants/MESSAGES";
 
 const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
   const headerStyle = {
@@ -23,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
     <>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div style={headerStyle}>
-          <h3 style={welcomeTextStyle}>Welcome, {username}!</h3>
+          <h3 style={welcomeTextStyle}>{WELCOME}, {username}!</h3>
         </div>
         <Button variant="danger" className="me-2 mx-1" onClick={onLogout}>
           {LOGOUT}

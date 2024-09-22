@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
 import { TODO_API_URL } from "../../constants/API_URLS";
+import { FETCH_TODOS_ERROR } from "../../constants/CONSOLE_ERRORS";
 
 const fetchTodos = async (
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
@@ -15,7 +16,7 @@ const fetchTodos = async (
     });
     setTodos(response.data);
   } catch (error) {
-    console.error("Failed to fetch todos:", error); // Log any errors
+    console.error({ FETCH_TODOS_ERROR}, error); // Log any errors
   }
 };
 

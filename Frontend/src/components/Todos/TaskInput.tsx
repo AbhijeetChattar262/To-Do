@@ -1,7 +1,8 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { TaskInputProps } from "../../interface/Todo";
-
+import { ADD_TASK_LABEL, UPDATE_TASK_LABEL } from "../../constants/LABELS";
+import { ADD_TASK_PLACEHOLDER } from "../../constants/PLACEHOLDERS";
 
 const TaskInput: React.FC<TaskInputProps> = ({
   newTask,
@@ -14,7 +15,7 @@ const TaskInput: React.FC<TaskInputProps> = ({
       <Form.Group controlId="formTask">
         <Form.Control
           type="text"
-          placeholder="Add a new task"
+          placeholder={ADD_TASK_PLACEHOLDER}
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           required
@@ -26,7 +27,7 @@ const TaskInput: React.FC<TaskInputProps> = ({
         onClick={onSubmit}
         className="mt-2"
       >
-        {editingTask ? "Update Task" : "Add Task"}
+        {editingTask ? UPDATE_TASK_LABEL : ADD_TASK_LABEL}
       </Button>
     </Form>
   );

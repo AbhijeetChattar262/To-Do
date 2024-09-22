@@ -2,6 +2,8 @@ import axios from "axios";
 import { Todo } from "../../interface/Todo";
 import Alert from "../../components/Alert/Alert";
 import { TODO_API_URL } from "../../constants/API_URLS";
+import { TASK_CANNOT_BE_EMPTY_ALERT } from "../../constants/ALERTS";
+import { FAILED_TO_ADD_TASK_ERROR, TASK_CANNOT_BE_EMPTY_ERROR } from "../../constants/CONSOLE_ERRORS";
 
 const handleAddTask = async (
   newTask: string,
@@ -15,9 +17,9 @@ const handleAddTask = async (
   // Check if the task is empty after trimming
   if (!trimmedTask) {
     Alert({
-      alertType: "taskCannotBeEmpty",
+      alertType: TASK_CANNOT_BE_EMPTY_ALERT,
     });
-    console.error("Task cannot be empty");
+    console.error({ TASK_CANNOT_BE_EMPTY_ERROR });
     return;
   }
 
@@ -36,7 +38,7 @@ const handleAddTask = async (
     setTodos([...todos, response.data]);
     setNewTask("");
   } catch (error) {
-    console.error("Failed to add task:", error);
+    console.error({FAILED_TO_ADD_TASK_ERROR}, error);
   }
 };
 

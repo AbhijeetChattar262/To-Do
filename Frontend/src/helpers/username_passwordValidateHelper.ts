@@ -1,4 +1,4 @@
-import { USERNAME,PASSWORD } from "../constants/REGEX/RegexConstants";
+import { USERNAME,PASSWORD } from "../constants/REGEX";
 export function isPasswordValid(password:string):boolean{
     console.log(PASSWORD.test(password))
     return PASSWORD.test(password);

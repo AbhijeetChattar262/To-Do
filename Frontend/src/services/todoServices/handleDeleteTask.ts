@@ -2,6 +2,8 @@ import axios from "axios";
 import { Todo } from "../../interface/Todo";
 import Alert from "../../components/Alert/Alert";
 import { TODO_API_URL } from "../../constants/API_URLS";
+import { DELETE_TASK_ALERT } from "../../constants/ALERTS";
+import { DELETE_TASK_ERROR, UNEXPECTED_ERROR } from "../../constants/CONSOLE_ERRORS";
 
 const deleteTask = async (
   id: number,
@@ -19,11 +21,11 @@ const deleteTask = async (
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
-        "Error deleting task:",
+        DELETE_TASK_ERROR,
         error.response?.data || error.message
       );
     } else {
-      console.error("Unexpected error:", error);
+      console.error({ UNEXPECTED_ERROR}, error);
     }
   }
 };
@@ -36,7 +38,7 @@ const handleDeleteTask = async (
   const token = localStorage.getItem("token");
 
   Alert({
-    alertType: "deleteTask",
+    alertType: DELETE_TASK_ALERT,
     onConfirm: () => deleteTask(id, setTodos, todos, token),
   });
 };

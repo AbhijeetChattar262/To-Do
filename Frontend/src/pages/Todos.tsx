@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
 import Header from "../components/Todos/Header";
 import TaskList from "../components/Todos/TaskList";
-import { PENDING_TASK, COMPLETED_TASK } from "../constants/HEADINGS";
+import { PENDING_TASK, COMPLETED_TASK } from "../constants/LABELS";
 
 const Todos: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);

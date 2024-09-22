@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../../services/authServices";
-import { LOGIN, REGISTER } from "../../constants/HEADINGS";
+import { LOGIN, REGISTER, USERNAME_LABEL, PASSWORD_LABEL} from "../../constants/LABELS";
+import { USERNAME_PLACEHOLDER, PASSWORD_PLACEHOLDER } from "../../constants/PLACEHOLDERS";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -21,22 +22,22 @@ const LoginForm: React.FC = () => {
       }}
     >
       <Form.Group className="mb-3">
-        <Form.Label>Username</Form.Label>
+        <Form.Label>{USERNAME_LABEL}</Form.Label>
         <Form.Control
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter your username"
+          placeholder={USERNAME_PLACEHOLDER}
           required
         />
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>Password</Form.Label>
+        <Form.Label>{PASSWORD_LABEL}</Form.Label>
         <Form.Control
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
+          placeholder={PASSWORD_PLACEHOLDER}
           required
         />
       </Form.Group>
