@@ -18,7 +18,6 @@ const TaskInput: React.FC<TaskInputProps> = ({
           placeholder={ADD_TASK_PLACEHOLDER}
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
-          required
         />
       </Form.Group>
       <Button

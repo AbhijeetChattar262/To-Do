@@ -12,7 +12,7 @@ export interface HeaderProps {
 export interface TaskInputProps {
   newTask: string;
   setNewTask: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: () => void;
+  onSubmit: (e:React.FormEvent) => void;
   editingTask: boolean;
 }
 

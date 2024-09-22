@@ -26,7 +26,8 @@ const Todos: React.FC = () => {
     fetchTodos(setTodos);
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e:React.FormEvent) => {
+    e.preventDefault();
     if (editingTask) {
       handleUpdateTask(
         editingTask,
