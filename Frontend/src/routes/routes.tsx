@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import AuthGuard from "../components/AuthGuard";
 import NotFound from "../components/NotFound";
 import LoadingSpinner from "../components/Spinner/LoadingSpinner";
+import MyErrorBoundary from "../components/MyErrorBoundary";
 
 const Todos= React.lazy(() => import("../pages/Todos"));
 const routes = (
@@ -15,9 +16,11 @@ const routes = (
       path="/todos"
       element={
         <AuthGuard>
+        <MyErrorBoundary >
         <Suspense fallback={<LoadingSpinner />}>
           <Todos />
         </Suspense>
+        </MyErrorBoundary>
         </AuthGuard>
       }
     />
