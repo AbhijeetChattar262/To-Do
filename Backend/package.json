@@ -19,7 +19,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.11.0",
     "path": "^0.12.7",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "@prisma/client": "^5.19.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -30,6 +31,7 @@
     "sequelize-cli": "^6.6.2",
     "sequelize-typescript": "^2.1.6",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "prisma": "^5.19.1"
   }
 }
