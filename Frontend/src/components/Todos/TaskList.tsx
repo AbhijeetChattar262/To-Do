@@ -15,6 +15,8 @@ const TaskList: React.FC<TaskListProps> = ({
   setEditingTask,
   completed,
 }) => {
+  // throw new Error("Oops! Something went wrong.");
+
   const filteredTodos = todos.filter((todo) => todo.completed === completed);
   return (
     <ListGroupStyled>

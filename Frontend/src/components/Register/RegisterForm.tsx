@@ -33,7 +33,7 @@ const RegisterForm: React.FC = () => {
           required
         />
       </FormGroup>
-      <Button type="submit" onClick={(e:any) => handleRegister(e, username, password, navigate)}>{REGISTER}</Button>
+      <Button type="submit" onClick={(e:any) => handleRegister(e, username, password, setUsername, setPassword, navigate)}>{REGISTER}</Button>
       <GreenButton type="button" onClick={() => navigate("/login")}>{ALREADY_REGISTERED}</GreenButton>
     </FormContainer>
   );

@@ -24,7 +24,7 @@ const registerUser = async (req: Request, res: Response) => {
     });
 
     if (existingUser) {
-      return res.status(400).json({ message: REGISTER_MESSAGES.USER_ALREADY_EXISTS });
+      return res.status(409).json({ message: REGISTER_MESSAGES.USER_ALREADY_EXISTS });
     }
 
     // Hash the password
