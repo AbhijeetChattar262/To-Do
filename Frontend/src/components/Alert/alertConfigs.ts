@@ -80,6 +80,15 @@ const alertConfigs: Record<string, SweetAlertOptions> = {
       confirmButton: ButtonStyles,
     },
   },
+  credentialsCannotBeEmpty: {
+    icon: "error",
+    title: "Credentials cannot be empty",
+    text: "Please enter credentials!",
+    customClass: {
+      container: ErrorAlert,
+      confirmButton: ButtonStyles,
+    },
+  },
   logout: {
     icon: "info",
     title: "Logout",

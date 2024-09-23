@@ -13,3 +13,5 @@ export const REGISTERATION_FAILED_ALERT = "registerFailed";
 export const TASK_CANNOT_BE_EMPTY_ALERT = "taskCannotBeEmpty";
 export const DELETE_TASK_ALERT = "deleteTask";
 
+export const CREDENTIALS_CANNOT_BE_EMPTY_ALERT = "credentialsCannotBeEmpty";
+
