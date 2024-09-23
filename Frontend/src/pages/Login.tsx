@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/Login/LoginForm";
 import LoginHeader from "../components/Login/LoginHeader";
 import LoginContainer from "../components/Login/LoginContainer";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();

@@ -1,10 +1,11 @@
-import { Button, Form, ListGroup } from "react-bootstrap";
+import React from "react";
+import { Button, ButtonDelete, ListGroupStyled, ListItemStyled, CheckboxStyled } from "../../styles/TodoStyles";
 import {
   handleDeleteTask,
   handleEditTask,
   handleToggleCompleted,
 } from "../../services/todoServices";
-import { TaskListProps } from "../../interface/Todo";
+import { TaskListProps } from "../../interface/Todo/index";
 import { EDIT_LABEL, DELETE_LABEL } from "../../constants/LABELS";
 
 const TaskList: React.FC<TaskListProps> = ({
@@ -14,16 +15,15 @@ const TaskList: React.FC<TaskListProps> = ({
   setEditingTask,
   completed,
 }) => {
-  const filteredTodos = todos.filter((todo) => todo.completed == completed);
+  // throw new Error("Oops! Something went wrong.");
+
+  const filteredTodos = todos.filter((todo) => todo.completed === completed);
   return (
-    <ListGroup>
+    <ListGroupStyled>
       {filteredTodos.map((todo) => (
-        <ListGroup.Item
-          key={todo.id}
-          className="d-flex justify-content-between align-items-center"
-        >
-          <div>
-            <Form.Check
+        <ListItemStyled key={todo.id}>
+          <div className="d-flex align-items-center">
+            <CheckboxStyled
               type="checkbox"
               checked={todo.completed}
               onChange={() => handleToggleCompleted(todo.id, setTodos, todos)}
@@ -32,23 +32,19 @@ const TaskList: React.FC<TaskListProps> = ({
           </div>
           <div>
             <Button
-              variant="info"
               onClick={() => handleEditTask(todo, setEditingTask, setNewTask)}
-              className="me-2 my-1"
             >
               {EDIT_LABEL}
             </Button>
-            <Button
-              variant="danger"
-              className="me-2 my-1"
+            <ButtonDelete
               onClick={() => handleDeleteTask(todo.id, setTodos, todos)}
             >
               {DELETE_LABEL}
-            </Button>
+            </ButtonDelete>
           </div>
-        </ListGroup.Item>
+        </ListItemStyled>
       ))}
-    </ListGroup>
+    </ListGroupStyled>
   );
 };
 

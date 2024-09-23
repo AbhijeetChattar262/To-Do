@@ -1,36 +1,21 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { ButtonLogout, HeaderContainer ,WelcomeMessage, Title} from "../../styles/TodoStyles";
 import { LOGOUT, YOUR_TASKS } from "../../constants/LABELS";
-import { HeaderProps } from "../../interface/Todo";
-import { WELCOME} from "../../constants/MESSAGES";
+import { HeaderProps } from "../../interface/Todo/index";
+import { WELCOME } from "../../constants/MESSAGES";
 
 const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
-  const headerStyle = {
-    padding: "10px",
-    display: "inline-block", 
-    minWidth: "200px",
-    textAlign: "center" as "center", 
-    marginRight: "auto",
-    marginLeft: "0",
-  };
-
-  const welcomeTextStyle = {
-    margin: "0",
-    color: "#007bff", 
-    fontFamily: "cursive",
-  };
-
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <div style={headerStyle}>
-          <h3 style={welcomeTextStyle}>{WELCOME}, {username}!</h3>
-        </div>
-        <Button variant="danger" className="me-2 mx-1" onClick={onLogout}>
+      <HeaderContainer>
+        <WelcomeMessage>
+          {WELCOME}, {username}!
+        </WelcomeMessage>
+        <ButtonLogout onClick={onLogout}>
           {LOGOUT}
-        </Button>
-      </div>
-      <h1 className="text-center">{YOUR_TASKS}</h1>
+        </ButtonLogout>
+      </HeaderContainer>
+      <Title style={{ textAlign: 'center' }}>{YOUR_TASKS}</Title>
     </>
   );
 };

@@ -1,6 +1,4 @@
 import React, { useEffect, useState, Suspense } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Todo } from "../interface/Todo";
 import {
   handleAddTask,
@@ -13,6 +11,7 @@ import TaskInput from "../components/Todos/TaskInput";
 import Header from "../components/Todos/Header";
 import { PENDING_TASK, COMPLETED_TASK } from "../constants/LABELS";
 import LoadingSpinner from "../components/Spinner/LoadingSpinner";
+import { Container, Row, Col, TaskTitle } from "../styles/TodoPageStyles"; 
 
 // Lazy load TaskList
 const TaskList = React.lazy(() => import("../components/Todos/TaskList"));
@@ -22,7 +21,6 @@ const Todos: React.FC = () => {
   const [newTask, setNewTask] = useState<string>("");
   const [editingTask, setEditingTask] = useState<Todo | null>(null);
   const navigate = useNavigate();
-
   const username = localStorage.getItem("username");
 
   useEffect(() => {
@@ -50,46 +48,41 @@ const Todos: React.FC = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container>
+      <Header username={username} onLogout={handleUserLogout} />
+      <TaskInput
+        newTask={newTask}
+        setNewTask={setNewTask}
+        onSubmit={handleSubmit}
+        editingTask={!!editingTask}
+      />
       <Row>
-        <Col md={8} className="mx-auto">
-          <Header username={username} onLogout={handleUserLogout} />
-          <TaskInput
-            newTask={newTask}
-            setNewTask={setNewTask}
-            onSubmit={handleSubmit}
-            editingTask={!!editingTask}
-          />
-          <Row>
-            <Col>
-              <h3>{PENDING_TASK}</h3>
-              <Suspense fallback={<LoadingSpinner/>}>
-                <TaskList
-                  todos={todos}
-                  setTodos={setTodos}
-                  setNewTask={setNewTask}
-                  setEditingTask={setEditingTask}
-                  completed={false}
-                />
-              </Suspense>
-            </Col>
-            <Col>
-              <h3>{COMPLETED_TASK}</h3>
-              <Suspense fallback={<LoadingSpinner/>}>
-                <TaskList
-                  todos={todos}
-                  setTodos={setTodos}
-                  setNewTask={setNewTask}
-                  setEditingTask={setEditingTask}
-                  completed={true}
-                />
-              </Suspense>
-            </Col>
-          </Row>
+        <Col>
+          <TaskTitle>{PENDING_TASK}</TaskTitle>
+          <Suspense fallback={<LoadingSpinner />}>
+            <TaskList
+              todos={todos}
+              setTodos={setTodos}
+              setNewTask={setNewTask}
+              setEditingTask={setEditingTask}
+              completed={false}
+            />
+          </Suspense>
+        </Col>
+        <Col>
+          <TaskTitle>{COMPLETED_TASK}</TaskTitle>
+          <Suspense fallback={<LoadingSpinner />}>
+            <TaskList
+              todos={todos}
+              setTodos={setTodos}
+              setNewTask={setNewTask}
+              setEditingTask={setEditingTask}
+              completed={true}
+            />
+          </Suspense>
         </Col>
       </Row>
     </Container>
   );
 };
-
 export default Todos;

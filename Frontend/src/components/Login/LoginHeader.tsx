@@ -1,8 +1,9 @@
 import React from "react";
 import { LOGIN } from "../../constants/LABELS";
+import { Header } from "../../styles/FormStyles"; 
 
 const LoginHeader: React.FC = () => {
-  return <h2 className="mb-4 login-form">{LOGIN}</h2>;
+  return <Header>{LOGIN}</Header>; // Use the styled Header component
 };
 
 export default LoginHeader;
