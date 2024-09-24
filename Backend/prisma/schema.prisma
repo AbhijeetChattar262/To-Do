@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model todo {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId // Use ObjectId as MongoDB requires
+  task      String
+  completed Boolean  @default(false)
+  userId    String   @db.ObjectId
+  user      user     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model user {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId // MongoDB requires ObjectId
+  username String   @unique
+  password String
+  todo     todo[]
+}
+
