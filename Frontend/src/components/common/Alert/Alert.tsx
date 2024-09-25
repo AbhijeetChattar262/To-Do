@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import alertConfigs from "./alertConfigs";
-import AlertProps  from "../../interface/Alert";
+import AlertProps  from "./AlertTypes";
 
 const Alert: React.FC<AlertProps> = ({ alertType, onConfirm }) => {
   const handleAlert = () => {

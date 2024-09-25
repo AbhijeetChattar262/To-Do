@@ -3,9 +3,9 @@ import { Route } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AuthGuard from "../components/AuthGuard";
-import NotFound from "../components/NotFound";
-import LoadingSpinner from "../components/Spinner/LoadingSpinner";
-import MyErrorBoundary from "../components/MyErrorBoundary";
+import NotFound from "../components/common/PageNotFound/NotFound";
+import Spinner from "../components/common/Spinner/Spinner";
+import ErrorBoundary from "../components/common/ErrorBoundary/ErrorBoundary";
 
 const Todos= React.lazy(() => import("../pages/Todos"));
 const routes = (
@@ -16,11 +16,11 @@ const routes = (
       path="/todos"
       element={
         <AuthGuard>
-        <MyErrorBoundary >
-        <Suspense fallback={<LoadingSpinner />}>
+        <ErrorBoundary >
+        <Suspense fallback={<Spinner />}>
           <Todos />
         </Suspense>
-        </MyErrorBoundary>
+        </ErrorBoundary>
         </AuthGuard>
       }
     />

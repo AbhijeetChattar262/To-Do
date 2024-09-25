@@ -1,8 +1,10 @@
+// TodoHeader.tsx
 import React from "react";
-import { ButtonLogout, HeaderContainer ,WelcomeMessage, Title} from "../../styles/TodoStyles";
+import { HeaderContainer, WelcomeMessage, TitleYourTask } from "../../styles/TodoStyles";
 import { LOGOUT, YOUR_TASKS } from "../../constants/LABELS";
 import { HeaderProps } from "../../interface/Todo/index";
 import { WELCOME } from "../../constants/MESSAGES";
+import Button from "../common/Button/Button";
 
 const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
   return (
@@ -11,11 +13,11 @@ const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
         <WelcomeMessage>
           {WELCOME}, {username}!
         </WelcomeMessage>
-        <ButtonLogout onClick={onLogout}>
+        <Button buttonStyle="danger" width="auto" onClick={onLogout}>
           {LOGOUT}
-        </ButtonLogout>
+        </Button>
       </HeaderContainer>
-      <Title style={{ textAlign: 'center' }}>{YOUR_TASKS}</Title>
+      <TitleYourTask>{YOUR_TASKS}</TitleYourTask>
     </>
   );
 };

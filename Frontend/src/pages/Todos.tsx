@@ -8,12 +8,16 @@ import {
 import { handleLogout } from "../services/authServices";
 import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
-import Header from "../components/Todos/Header";
+import Header from "../components/Todos/TodoHeader";
 import { PENDING_TASK, COMPLETED_TASK } from "../constants/LABELS";
-import LoadingSpinner from "../components/Spinner/LoadingSpinner";
-import { Container, Row, Col, TaskTitle } from "../styles/TodoPageStyles"; 
+import Spinner from "../components/common/Spinner/Spinner";
+import {
+  TasksContainer,
+  TaskTitle,
+  TodoContainer,
+  TaskColumn,
+} from "../styles/TodoStyles";
 
-// Lazy load TaskList
 const TaskList = React.lazy(() => import("../components/Todos/TaskList"));
 
 const Todos: React.FC = () => {
@@ -31,7 +35,7 @@ const Todos: React.FC = () => {
     e.preventDefault();
     if (editingTask) {
       handleUpdateTask(
-        editingTask,
+        editingTask, 
         newTask,
         setTodos,
         todos,
@@ -39,6 +43,7 @@ const Todos: React.FC = () => {
         setEditingTask
       );
     } else {
+      console.log("Before adding task:", newTask); // Log the task being added
       handleAddTask(newTask, todos, setTodos, setNewTask);
     }
   };
@@ -48,7 +53,7 @@ const Todos: React.FC = () => {
   };
 
   return (
-    <Container>
+    <TodoContainer>
       <Header username={username} onLogout={handleUserLogout} />
       <TaskInput
         newTask={newTask}
@@ -56,10 +61,10 @@ const Todos: React.FC = () => {
         onSubmit={handleSubmit}
         editingTask={!!editingTask}
       />
-      <Row>
-        <Col>
+      <TasksContainer>
+        <TaskColumn>
           <TaskTitle>{PENDING_TASK}</TaskTitle>
-          <Suspense fallback={<LoadingSpinner />}>
+          <Suspense fallback={<Spinner />}>
             <TaskList
               todos={todos}
               setTodos={setTodos}
@@ -68,10 +73,11 @@ const Todos: React.FC = () => {
               completed={false}
             />
           </Suspense>
-        </Col>
-        <Col>
+        </TaskColumn>
+
+        <TaskColumn>
           <TaskTitle>{COMPLETED_TASK}</TaskTitle>
-          <Suspense fallback={<LoadingSpinner />}>
+          <Suspense fallback={<Spinner />}>
             <TaskList
               todos={todos}
               setTodos={setTodos}
@@ -80,9 +86,10 @@ const Todos: React.FC = () => {
               completed={true}
             />
           </Suspense>
-        </Col>
-      </Row>
-    </Container>
+        </TaskColumn>
+      </TasksContainer>
+    </TodoContainer>
   );
 };
+
 export default Todos;

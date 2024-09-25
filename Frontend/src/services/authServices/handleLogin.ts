@@ -1,4 +1,4 @@
-import Alert from "../../components/Alert/Alert";
+import Alert from "../../components/common/Alert/Alert";
 import axios from "axios";
 import { NavigateFunction } from "react-router-dom";
 import { LOGIN_API_URL } from "../../constants/API_URLS";

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
-import Alert from "../../components/Alert/Alert";
+import Alert from "../../components/common/Alert/Alert";
 import { TODO_API_URL } from "../../constants/API_URLS";
 import { DELETE_TASK_ALERT } from "../../constants/ALERTS";
 import { DELETE_TASK_ERROR, UNEXPECTED_ERROR } from "../../constants/CONSOLE_ERRORS";

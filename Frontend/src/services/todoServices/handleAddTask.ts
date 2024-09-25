@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Todo } from "../../interface/Todo";
-import Alert from "../../components/Alert/Alert";
+import Alert from "../../components/common/Alert/Alert";
 import { TODO_API_URL } from "../../constants/API_URLS";
 import { TASK_CANNOT_BE_EMPTY_ALERT } from "../../constants/ALERTS";
 import { FAILED_TO_ADD_TASK_ERROR, TASK_CANNOT_BE_EMPTY_ERROR } from "../../constants/CONSOLE_ERRORS";
@@ -11,14 +11,10 @@ const handleAddTask = async (
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
   setNewTask: React.Dispatch<React.SetStateAction<string>>
 ) => {
-  // Trim the new task to remove any leading or trailing whitespace
   const trimmedTask = newTask.trim();
 
-  // Check if the task is empty after trimming
   if (!trimmedTask) {
-    Alert({
-      alertType: TASK_CANNOT_BE_EMPTY_ALERT,
-    });
+    Alert({ alertType: TASK_CANNOT_BE_EMPTY_ALERT });
     console.error({ TASK_CANNOT_BE_EMPTY_ERROR });
     return;
   }
@@ -30,16 +26,19 @@ const handleAddTask = async (
       TODO_API_URL,
       { task: trimmedTask },
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     setTodos([...todos, response.data]);
-    setNewTask("");
+    console.log("Task added successfully"); 
+    setNewTask(""); // Clear the input after successful addition
+    console.log("After adding task:", newTask); 
+
+
   } catch (error) {
-    console.error({FAILED_TO_ADD_TASK_ERROR}, error);
+    console.error({ FAILED_TO_ADD_TASK_ERROR }, error);
   }
 };
+
 
 export default handleAddTask;

@@ -1,6 +1,7 @@
-import { ErrorContainer, ErrorTitle, ErrorMessage, RetryButton } from '../../styles/ErrorBoundaryStyles';
+import React from 'react';
+import { ErrorContainer, ErrorTitle, ErrorMessage, RetryButton } from './FallbackComponentStyles';
 
-const ErrorBoundary = () => {
+const FallbackComponent: React.FC = () => {
   const handleRetry = () => {
     window.location.reload();
   };
@@ -13,5 +14,4 @@ const ErrorBoundary = () => {
     </ErrorContainer>
   );
 };
-
-export default ErrorBoundary;
+export default FallbackComponent;

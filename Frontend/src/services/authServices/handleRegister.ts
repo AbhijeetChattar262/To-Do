@@ -1,5 +1,5 @@
 import axios from "axios";
-import Alert from "../../components/Alert/Alert";
+import Alert from "../../components/common/Alert/Alert";
 import { NavigateFunction } from "react-router-dom";
 import { REGISTER_API_URL } from "../../constants/API_URLS";
 import { isPasswordValid, isUsernameValid } from "../../helpers/username_passwordValidateHelper";

@@ -1,5 +1,5 @@
 import { NavigateFunction } from "react-router-dom";
-import Alert from "../../components/Alert/Alert";
+import Alert from "../../components/common/Alert/Alert";
 import { LOGOUT_ALERT } from "../../constants/ALERTS";
 
 const handleLogout = (navigate: NavigateFunction) => {

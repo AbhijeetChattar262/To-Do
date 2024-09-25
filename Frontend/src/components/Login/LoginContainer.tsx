@@ -1,13 +1,11 @@
 import React from "react";
-import { Container, Row, Col } from "../../styles/FormStyles";
+import Container from '../common/Container/Container';
 import { LoginContainerProps } from "../../interface/Auth";
 
-const LoginContainer: React.FC<LoginContainerProps> = ({ children }) => {
+const LoginContainer: React.FC<LoginContainerProps>  = ({ children }) => {
   return (
-    <Container>
-      <Row>
-        <Col>{children}</Col>
-      </Row>
+    <Container width="400px">
+      {children}
     </Container>
   );
 };

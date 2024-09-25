@@ -6,9 +6,9 @@ import {
   Subheader,
   Message,
   ButtonStyled,
-} from "../styles/NotFoundStyles";
-import { GO_HOME_LABEL } from "../constants/LABELS";
-import { PAGE_NOT_FOUND_HEADER, PAGE_NOT_FOUND_SUBHEADER, PAGE_NOT_FOUND_MESSAGE } from "../constants/MESSAGES";
+} from "./NotFoundStyles";
+import { GO_HOME_LABEL } from "../../../constants/LABELS";
+import { PAGE_NOT_FOUND_HEADER, PAGE_NOT_FOUND_SUBHEADER, PAGE_NOT_FOUND_MESSAGE } from "../../../constants/MESSAGES";
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();

@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, ButtonDelete, ListGroupStyled, ListItemStyled, CheckboxStyled } from "../../styles/TodoStyles";
+import { ListGroupStyled, ListItemStyled, CheckboxStyled } from "../../styles/TodoStyles";
+import Button from "../common/Button/Button";
 import {
   handleDeleteTask,
   handleEditTask,
@@ -15,14 +16,13 @@ const TaskList: React.FC<TaskListProps> = ({
   setEditingTask,
   completed,
 }) => {
-  // throw new Error("Oops! Something went wrong.");
-
   const filteredTodos = todos.filter((todo) => todo.completed === completed);
+
   return (
     <ListGroupStyled>
       {filteredTodos.map((todo) => (
         <ListItemStyled key={todo.id}>
-          <div className="d-flex align-items-center">
+          <div> 
             <CheckboxStyled
               type="checkbox"
               checked={todo.completed}
@@ -32,15 +32,19 @@ const TaskList: React.FC<TaskListProps> = ({
           </div>
           <div>
             <Button
+              buttonStyle="warning"
+              width="auto"
               onClick={() => handleEditTask(todo, setEditingTask, setNewTask)}
             >
               {EDIT_LABEL}
             </Button>
-            <ButtonDelete
+            <Button
+              buttonStyle="danger"
+              width="auto"
               onClick={() => handleDeleteTask(todo.id, setTodos, todos)}
             >
               {DELETE_LABEL}
-            </ButtonDelete>
+            </Button>
           </div>
         </ListItemStyled>
       ))}
