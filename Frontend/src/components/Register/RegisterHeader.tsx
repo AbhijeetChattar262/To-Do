@@ -1,6 +1,6 @@
 import React from "react";
-import { REGISTER } from "../../constants/LABELS";
-import { HeaderLabel } from "../../styles/FormStyles";
+import { REGISTER } from "../../constants/labels";
+import { HeaderLabel } from "../../styles/form.style";
 
 const RegisterHeader: React.FC = () => {
   return <HeaderLabel>{REGISTER}</HeaderLabel>; 

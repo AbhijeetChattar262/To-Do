@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button/Button";
-import { handleRegister } from "../../services/authServices";
+import  AuthService from "../../services/auth.service";
 import {
   REGISTER,
   USERNAME_LABEL,
   PASSWORD_LABEL,
-} from "../../constants/LABELS";
+} from "../../constants/labels";
 import {
   USERNAME_PLACEHOLDER,
   PASSWORD_PLACEHOLDER,
-} from "../../constants/PLACEHOLDERS";
-import { ALREADY_REGISTERED } from "../../constants/MESSAGES";
+} from "../../constants/placeholders";
+import { ALREADY_REGISTERED } from "../../constants/messages";
 import Container from "../common/Container/Container";
-import { FormContainer, FormGroup, FormLabel } from "../../styles/FormStyles";
+import { FormContainer, FormGroup, FormLabel } from "../../styles/form.style";
 import Input from "../common/Input/Input";
 
 const RegisterForm: React.FC = () => {
@@ -23,7 +23,7 @@ const RegisterForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleRegister(e, username, password, setUsername, setPassword, navigate);
+    AuthService.handleRegister(e, username, password, setUsername, setPassword, navigate);
   };
 
   return (
