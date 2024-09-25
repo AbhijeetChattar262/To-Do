@@ -13,7 +13,7 @@ import {
   CREDENTIALS_CANNOT_BE_EMPTY_ALERT,
   LOGOUT_ALERT,
 } from "../constants/alerts";
-import { isPasswordValid, isUsernameValid } from "../helpers/usernamePasswordValidator";
+import { isPasswordValid, isUsernameValid } from "../helpers/username-password-validator";
 
 
 // ============================================= AuthService class started =================================================
