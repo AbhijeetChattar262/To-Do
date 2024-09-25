@@ -1,4 +1,4 @@
-import { PrismaAdapter } from "../mysql/prisma.adapter";
+import { PrismaAdapter } from "../mssql/prisma.adapter";
 import { TodoAttributes } from "../../types/db-types";
 
 class TodoDbManager {

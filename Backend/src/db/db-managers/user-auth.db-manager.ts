@@ -1,7 +1,7 @@
-import { PrismaAdapter } from "../mysql/prisma.adapter";
+import { PrismaAdapter } from "../mssql/prisma.adapter";
 import { UserAttributes } from "../../types/db-types";
 
-export class AuthManager {
+export class UserAuthManager {
   private static adapter = PrismaAdapter.getInstance();
 
   // Find a user by username

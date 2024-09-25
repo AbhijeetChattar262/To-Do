@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/db-services/user.service";
-import { LOGIN_MESSAGES } from "../constants/AUTH/loginConstants";
-import { REGISTER_MESSAGES } from "../constants/AUTH/registerConstants";
+import { UserAuthService } from "../services/db-services/user-auth.service";
+import { LOGIN_MESSAGES, REGISTER_MESSAGES } from "../constants/AUTH";
 
-class UserController {
+class UserAuthController {
   // Login method
   static async loginUser(req: Request, res: Response) {
     const { username, password } = req.body;
@@ -13,7 +12,7 @@ class UserController {
     }
 
     try {
-      const token = await UserService.login(username, password);
+      const token = await UserAuthService.login(username, password);
       if (token) {
         res.json({ message: LOGIN_MESSAGES.LOGIN_SUCCESS, token });
       } else {
@@ -35,7 +34,7 @@ class UserController {
     }
 
     try {
-      const newUser = await UserService.register(username, password);
+      const newUser = await UserAuthService.register(username, password);
 
       if (newUser) {
         res.status(201).json({
@@ -56,4 +55,4 @@ class UserController {
   }
 }
 
-export default UserController;
+export default UserAuthController;

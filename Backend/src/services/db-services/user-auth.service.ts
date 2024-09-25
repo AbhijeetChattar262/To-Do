@@ -1,12 +1,11 @@
-import { AuthManager } from "../../db/db-managers/user.db-manager"; 
+import { UserAuthManager } from "../../db/db-managers/user-auth.db-manager"; 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import {  JWT_SECRET } from "../../constants/AUTH/loginConstants";
-import { REGISTER_MESSAGES } from "../../constants/AUTH/registerConstants";
+import { REGISTER_MESSAGES,JWT_SECRET } from "../../constants/AUTH";
 import { UserAttributes } from "../../types/db-types";
- export class UserService {
+ export class UserAuthService {
    public  static async login(username: string, password: string): Promise<string | null> {
-        const user: UserAttributes | null = await AuthManager.findUserByUsername(username);
+        const user: UserAttributes | null = await UserAuthManager.findUserByUsername(username);
     
         if (!user) {
           return null;  // User not found
@@ -27,7 +26,7 @@ import { UserAttributes } from "../../types/db-types";
 
     public   static async register(username: string, password: string): Promise<UserAttributes | null> {
         // Check if the user already exists
-        const existingUser = await AuthManager.findUserByUsername(username);
+        const existingUser = await UserAuthManager.findUserByUsername(username);
     
         if (existingUser) {
           
@@ -37,7 +36,7 @@ import { UserAttributes } from "../../types/db-types";
         const hashedPassword = await bcrypt.hash(password, 10);
     
         // Create a new user
-        const newUser = await AuthManager.createUser(username, hashedPassword);
+        const newUser = await UserAuthManager.createUser(username, hashedPassword);
     
         return newUser;
       }

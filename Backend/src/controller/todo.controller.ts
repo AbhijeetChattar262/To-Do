@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { MESSAGES } from "../constants/TODO/todoConstants";
+import { MESSAGES } from "../constants/TODO";
 import { TodoServices } from "../services/db-services/todo.service";
 
 class TodoController {

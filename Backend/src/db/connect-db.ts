@@ -1,8 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import * as dotenv from 'dotenv';
-import { DB_MESSAGES } from '../constants/DB/dbConstants';
+import { DB_MESSAGES } from '../constants/DB';
 
-dotenv.config();
 
 const prisma = new PrismaClient();
 
