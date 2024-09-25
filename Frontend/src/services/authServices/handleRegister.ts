@@ -2,7 +2,7 @@ import axios from "axios";
 import Alert from "../../components/common/Alert/Alert";
 import { NavigateFunction } from "react-router-dom";
 import { REGISTER_API_URL } from "../../constants/API_URLS";
-import { isPasswordValid, isUsernameValid } from "../../helpers/username_passwordValidateHelper";
+import { isPasswordValid, isUsernameValid } from "../../helpers/usernamePasswordValidator";
 import { REGISTER_SUCCESS_ALERT, REGISTERATION_FAILED_ALERT, INVALID_USERNAME_ALERT, INVALID_PASSWORD_ALERT, USER_ALREADY_EXISTS_ALERT,CREDENTIALS_CANNOT_BE_EMPTY_ALERT } from "../../constants/ALERTS";
 
 const handleRegister = async (

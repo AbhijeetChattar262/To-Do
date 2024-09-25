@@ -11,7 +11,7 @@ export const SpinnerStyled = styled.div`
   width: 4rem;
   height: 4rem;
   border: 0.5rem solid transparent;
-  border-top-color: #007bff; /* Primary color */
+  border-top-color: #007bff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 

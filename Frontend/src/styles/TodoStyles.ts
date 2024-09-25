@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 
 // =========================================================== TodoForm and TodoInput Styles ============================================================
-
 export const TodoForm = styled.form`
   margin: 20px 0;
 `;
 
 export const TodoInput = styled.input`
-   width: 97%;
+  width: 97%;
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 5px;
   margin-bottom: 10px;
 `;
+// =========================================================== TodoForm and TodoInput Styles End ============================================================
 
-// ============================================================= Containers Styles | TodoPage Styles =========================================================
-
+// ============================================================= Containers Styles | TodoPage Styles ============================================================
 export const TodoContainer = styled.div`
   max-width: 1010px;
   margin: 30px auto;
@@ -29,7 +28,6 @@ export const TasksContainer = styled.div`
   display: flex;
   margin-bottom: 30px;
   border-radius: 10px; 
-  
 `;
 
 export const TaskColumn = styled.div`
@@ -46,6 +44,7 @@ export const TaskColumn = styled.div`
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
   }
 `;
+// ============================================================= Containers Styles | TodoPage Styles End ============================================================
 
 // ========================================================================= Lists Styles ================================================================================================
 
@@ -62,7 +61,6 @@ export const ListItemStyled = styled.div`
   border-radius: 5px;
   margin-bottom: 10px;
   background-color: #fff;
-
 `;
 
 export const CheckboxStyled = styled.input`
@@ -70,6 +68,7 @@ export const CheckboxStyled = styled.input`
   height: 20px;
   margin-right: 10px;
 `;
+// ========================================================================= Lists Styles End ================================================================================================
 
 // ========================================================================= Header Styles ================================================================================================
 
@@ -104,3 +103,4 @@ export const WelcomeMessage = styled.h3`
   font-family: cursive;
   margin-right: 20px;
 `;
+// ========================================================================= Header Styles End ================================================================================================

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-// ========================== Form Container =======================
+// =============== FormContainer Styles Started ==============
 export const FormContainer = styled.form`
   width: 100%;
   padding: 20px;
@@ -9,29 +9,33 @@ export const FormContainer = styled.form`
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
+// =============== FormContainer Styles Ended ==============
 
-// ========================== Header Label =======================
+// =============== HeaderLabel Styles Started ==============
 export const HeaderLabel = styled.h1`
-  margin-bottom: 1rem; 
-  font-size: 1.5rem; 
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   text-align: center;
-  color: #343a40; 
-  width: 100%; 
+  color: #343a40;
+  width: 100%;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 `;
+// =============== HeaderLabel Styles Ended ==============
 
-// ========================== Form Group =======================
+// =============== FormGroup Styles Started ==============
 export const FormGroup = styled.div`
   width: 100%;
   padding: 2px;
   display: flex;
   flex-direction: column;
 `;
+// =============== FormGroup Styles Ended ==============
 
-// ========================== Form Label =======================
+// =============== FormLabel Styles Started ==============
 export const FormLabel = styled.label`
   display: block;
   font-size: 1rem;
   margin-bottom: 0.5rem;
 `;
+// =============== FormLabel Styles Ended ==============
