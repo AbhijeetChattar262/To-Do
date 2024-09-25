@@ -1,11 +1,8 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { Todo } from "../interface/Todo";
-import {
-  handleAddTask,
-  handleUpdateTask,
-  fetchTodos,
-} from "../services/todoServices";
-import { handleLogout } from "../services/authServices";
+import TodoServices from "../services/TodoServices";
+import  AuthService from "../services/AuthServices";
+
 import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
 import Header from "../components/Todos/TodoHeader";
@@ -28,13 +25,13 @@ const Todos: React.FC = () => {
   const username = localStorage.getItem("username");
 
   useEffect(() => {
-    fetchTodos(setTodos);
+    TodoServices.fetchTodos(setTodos);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingTask) {
-      handleUpdateTask(
+      TodoServices.handleUpdateTask(
         editingTask, 
         newTask,
         setTodos,
@@ -44,12 +41,12 @@ const Todos: React.FC = () => {
       );
     } else {
       console.log("Before adding task:", newTask); // Log the task being added
-      handleAddTask(newTask, todos, setTodos, setNewTask);
+      TodoServices.handleAddTask(newTask, todos, setTodos, setNewTask);
     }
   };
 
   const handleUserLogout = () => {
-    handleLogout(navigate);
+    AuthService.handleLogout(navigate);
   };
 
   return (

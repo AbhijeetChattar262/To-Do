@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../common/Button/Button";
 import Input from "../common/Input/Input";
 import { FormContainer, FormGroup, FormLabel } from "../../styles/FormStyles";
-import { handleLogin } from "../../services/authServices";
+import  AuthService  from "../../services/AuthServices";
 import {
   LOGIN,
   REGISTER,
@@ -31,7 +31,7 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleLogin(e, username, password, navigate);
+    AuthService.handleLogin(e, username, password, navigate);
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button/Button";
-import { handleRegister } from "../../services/authServices";
+import  AuthService from "../../services/AuthServices";
 import {
   REGISTER,
   USERNAME_LABEL,
@@ -23,7 +23,7 @@ const RegisterForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleRegister(e, username, password, setUsername, setPassword, navigate);
+    AuthService.handleRegister(e, username, password, setUsername, setPassword, navigate);
   };
 
   return (
