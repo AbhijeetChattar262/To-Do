@@ -7,8 +7,8 @@ import {
   Message,
   ButtonStyled,
 } from "./NotFoundStyles";
-import { GO_HOME_LABEL } from "../../../constants/LABELS";
-import { PAGE_NOT_FOUND_HEADER, PAGE_NOT_FOUND_SUBHEADER, PAGE_NOT_FOUND_MESSAGE } from "../../../constants/MESSAGES";
+import { GO_HOME_LABEL } from "../../../constants/labels";
+import { PAGE_NOT_FOUND_HEADER, PAGE_NOT_FOUND_SUBHEADER, PAGE_NOT_FOUND_MESSAGE } from "../../../constants/messages";
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();

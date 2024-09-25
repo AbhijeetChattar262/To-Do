@@ -3,18 +3,18 @@
 import axios from "axios";
 import {Todo}  from "../interface/Todo";
 import Alert from "../components/common/Alert/Alert";
-import { TODO_API_URL, TOGGLE_TODO_API_URL } from "../constants/API_URLS";
+import { TODO_API_URL, TOGGLE_TODO_API_URL } from "../constants/api-urls";
 import {
   FETCH_TODOS_ERROR,
   FAILED_TO_ADD_TASK_ERROR,
   TASK_CANNOT_BE_EMPTY_ERROR,
   DELETE_TASK_ERROR,
   UNEXPECTED_ERROR,
-} from "../constants/CONSOLE_ERRORS";
+} from "../constants/console-errors";
 import {
   TASK_CANNOT_BE_EMPTY_ALERT,
   DELETE_TASK_ALERT,
-} from "../constants/ALERTS";
+} from "../constants/alerts";
 
 // ======================================================== TodoService class started ========================================================
 class TodoServices {

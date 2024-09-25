@@ -1,9 +1,9 @@
 import React from "react";
-import { TodoForm ,TodoInput} from "../../styles/TodoStyles";
+import { TodoForm ,TodoInput} from "../../styles/todo.style";
 import Button from "../common/Button/Button";
 import { TaskInputProps } from "../../interface/Todo/index";
-import { ADD_TASK_LABEL,UPDATE_TASK_LABEL} from "../../constants/LABELS";
-import { ADD_TASK_PLACEHOLDER } from "../../constants/PLACEHOLDERS";
+import { ADD_TASK_LABEL,UPDATE_TASK_LABEL} from "../../constants/labels";
+import { ADD_TASK_PLACEHOLDER } from "../../constants/placeholders";
 
 const TaskInput: React.FC<TaskInputProps> = ({
   newTask,

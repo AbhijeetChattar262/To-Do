@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button/Button";
 import Input from "../common/Input/Input";
-import { FormContainer, FormGroup, FormLabel } from "../../styles/FormStyles";
-import  AuthService  from "../../services/AuthServices";
+import { FormContainer, FormGroup, FormLabel } from "../../styles/form.style";
+import  AuthService  from "../../services/auth.service";
 import {
   LOGIN,
   REGISTER,
   USERNAME_LABEL,
   PASSWORD_LABEL,
-} from "../../constants/LABELS";
+} from "../../constants/labels";
 import {
   USERNAME_PLACEHOLDER,
   PASSWORD_PLACEHOLDER,
-} from "../../constants/PLACEHOLDERS";
+} from "../../constants/placeholders";
 import Container from "../common/Container/Container";
 
 const LoginForm: React.FC = () => {

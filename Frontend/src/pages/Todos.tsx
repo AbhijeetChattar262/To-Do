@@ -1,19 +1,19 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { Todo } from "../interface/Todo";
-import TodoServices from "../services/TodoServices";
-import  AuthService from "../services/AuthServices";
+import TodoServices from "../services/todo.service";
+import  AuthService from "../services/auth.service";
 
 import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
 import Header from "../components/Todos/TodoHeader";
-import { PENDING_TASK, COMPLETED_TASK } from "../constants/LABELS";
+import { PENDING_TASK, COMPLETED_TASK } from "../constants/labels";
 import Spinner from "../components/common/Spinner/Spinner";
 import {
   TasksContainer,
   TaskTitle,
   TodoContainer,
   TaskColumn,
-} from "../styles/TodoStyles";
+} from "../styles/todo.style";
 
 const TaskList = React.lazy(() => import("../components/Todos/TaskList"));
 

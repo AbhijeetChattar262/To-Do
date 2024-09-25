@@ -1,7 +1,7 @@
 import axios from "axios";
 import Alert from "../components/common/Alert/Alert";
 import { NavigateFunction } from "react-router-dom";
-import { LOGIN_API_URL, REGISTER_API_URL } from "../constants/API_URLS";
+import { LOGIN_API_URL, REGISTER_API_URL } from "../constants/api-urls";
 import {
   LOGIN_SUCCESS_ALERT,
   AUTHENTICATION_FAILED_ALERT,
@@ -12,7 +12,7 @@ import {
   USER_ALREADY_EXISTS_ALERT,
   CREDENTIALS_CANNOT_BE_EMPTY_ALERT,
   LOGOUT_ALERT,
-} from "../constants/ALERTS";
+} from "../constants/alerts";
 import { isPasswordValid, isUsernameValid } from "../helpers/usernamePasswordValidator";
 
 

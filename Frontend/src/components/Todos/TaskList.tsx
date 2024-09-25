@@ -1,9 +1,9 @@
 import React from "react";
-import { ListGroupStyled, ListItemStyled, CheckboxStyled } from "../../styles/TodoStyles";
+import { ListGroupStyled, ListItemStyled, CheckboxStyled } from "../../styles/todo.style";
 import Button from "../common/Button/Button";
-import TodoServices from "../../services/TodoServices";
+import TodoServices from "../../services/todo.service";
 import { TaskListProps } from "../../interface/Todo/index";
-import { EDIT_LABEL, DELETE_LABEL } from "../../constants/LABELS";
+import { EDIT_LABEL, DELETE_LABEL } from "../../constants/labels";
 
 const TaskList: React.FC<TaskListProps> = ({
   todos,
