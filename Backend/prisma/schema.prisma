@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_CONNECTION_URL")
+}
+
+model todo {
+  id        Int     @id @default(autoincrement())
+  task      String
+  completed Boolean @default(false)
+  userId    Int
+  user      user    @relation(fields: [userId], references: [id], map: "Todo_userId_fkey")
+
+  @@index([userId], map: "Todo_userId_idx")
+}
+
+model user {
+  id       Int    @id @default(autoincrement())
+  username String @unique(map: "User_username_key")
+  password String
+  todo     todo[]
+}

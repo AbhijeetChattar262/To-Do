@@ -74,7 +74,6 @@ class TodoServices {
         }
       );
       setTodos([...todos, response.data]);
-      console.log("Task added successfully");
       setNewTask(""); // Clear the input after successful addition
     } catch (error) {
       console.error({ FAILED_TO_ADD_TASK_ERROR }, error);

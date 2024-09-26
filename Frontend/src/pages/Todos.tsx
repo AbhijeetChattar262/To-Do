@@ -40,7 +40,6 @@ const Todos: React.FC = () => {
         setEditingTask
       );
     } else {
-      console.log("Before adding task:", newTask); // Log the task being added
       TodoServices.handleAddTask(newTask, todos, setTodos, setNewTask);
     }
   };
