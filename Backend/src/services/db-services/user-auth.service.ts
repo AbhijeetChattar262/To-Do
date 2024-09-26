@@ -1,7 +1,7 @@
 import { UserAuthManager } from "../../db/db-managers/user-auth.db-manager"; 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { REGISTER_MESSAGES,JWT_SECRET } from "../../constants/AUTH";
+import { REGISTER_MESSAGES,JWT_SECRET } from "../../constants/auth";
 import { UserAttributes } from "../../types/db-types";
  export class UserAuthService {
    public  static async login(username: string, password: string): Promise<string | null> {

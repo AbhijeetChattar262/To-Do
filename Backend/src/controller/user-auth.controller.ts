@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserAuthService } from "../services/db-services/user-auth.service";
-import { LOGIN_MESSAGES, REGISTER_MESSAGES } from "../constants/AUTH";
+import { LOGIN_MESSAGES, REGISTER_MESSAGES } from "../constants/auth";
 
 class UserAuthController {
   // Login method

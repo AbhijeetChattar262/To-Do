@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { DB_MESSAGES } from '../constants/DB';
+import { DB_MESSAGES } from '../constants/db';
 
 
 const prisma = new PrismaClient();
