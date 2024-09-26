@@ -5,17 +5,9 @@ import { TodoServices } from "../services/db-services/todo.service";
 class TodoController {
   // Add a new todo
    public static async addTodo(req: Request, res: Response) {
-    if (!req.user) {
-      console.error(MESSAGES.UNAUTHORIZED); // Debug output
-      return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
-    }
-
     const { task } = req.body;
+    // @ts-ignore
     const userId = req.user.id;
-
-    if (!task) {
-      return res.status(400).json({ message: MESSAGES.TASK_REQUIRED });
-    }
 
     try {
       const newTodo = await TodoServices.addTodo(userId, task);
@@ -32,9 +24,9 @@ class TodoController {
 
   // Delete a todo
   public  static async deleteTodo(req: Request, res: Response) {
-    if (!req.user) return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
-
+    
     const { id } = req.params;
+    // @ts-ignore
     const userId = req.user.id;
 
     try {
@@ -53,8 +45,7 @@ class TodoController {
 
   // Get all todos
   public  static async getTodos(req: Request, res: Response) {
-    if (!req.user) return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
-
+    // @ts-ignore
     const userId = req.user.id;
 
     try {
@@ -68,9 +59,8 @@ class TodoController {
 
   // Toggle todo completion
   public  static async toggleComplete(req: Request, res: Response) {
-    if (!req.user) return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
-
     const { id } = req.params;
+    // @ts-ignore
     const userId = req.user.id;
 
     try {
@@ -89,10 +79,9 @@ class TodoController {
 
   // Update a todo task
   public  static async updateTodo(req: Request, res: Response) {
-    if (!req.user) return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
-
-    const { id } = req.params;
+     const { id } = req.params;
     const { task } = req.body;
+    // @ts-ignore
     const userId = req.user.id;
 
     try {
