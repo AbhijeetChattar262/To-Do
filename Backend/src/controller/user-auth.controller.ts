@@ -46,7 +46,7 @@ class UserAuthController {
       }
     } catch (err: any) {
       if (err.message === REGISTER_MESSAGES.USER_ALREADY_EXISTS) {
-        return res.status(400).json({ message: REGISTER_MESSAGES.USER_ALREADY_EXISTS });
+        return res.status(409).json({ message: REGISTER_MESSAGES.USER_ALREADY_EXISTS });
       }
 
       console.error(REGISTER_MESSAGES.ERROR_REGISTERING_USER, err);
