@@ -4,10 +4,14 @@ import dotenv from "dotenv";
 import db from "./db/connect-db";
 import todosRouter from "./router/todo.router";
 import userRouter from "./router/user-auth.router";
+import {runPrismaCommands} from '../prisma/prisma-setup';
 
 dotenv.config();
 
+runPrismaCommands();
+
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(userRouter);
