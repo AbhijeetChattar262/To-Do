@@ -5,9 +5,11 @@ import { TodoServices } from "../services/db-services/todo.service";
 class TodoController {
   // Add a new todo
    public static async addTodo(req: Request, res: Response) {
+
     const { task } = req.body;
-    // @ts-ignore
+    //@ts-ignore
     const userId = req.user.id;
+
 
     try {
       const newTodo = await TodoServices.addTodo(userId, task);
@@ -24,9 +26,9 @@ class TodoController {
 
   // Delete a todo
   public  static async deleteTodo(req: Request, res: Response) {
-    
+
     const { id } = req.params;
-    // @ts-ignore
+    //@ts-ignore
     const userId = req.user.id;
 
     try {
@@ -45,7 +47,8 @@ class TodoController {
 
   // Get all todos
   public  static async getTodos(req: Request, res: Response) {
-    // @ts-ignore
+ 
+    //@ts-ignore
     const userId = req.user.id;
 
     try {
@@ -59,8 +62,9 @@ class TodoController {
 
   // Toggle todo completion
   public  static async toggleComplete(req: Request, res: Response) {
+    
     const { id } = req.params;
-    // @ts-ignore
+    //@ts-ignore
     const userId = req.user.id;
 
     try {
@@ -79,9 +83,10 @@ class TodoController {
 
   // Update a todo task
   public  static async updateTodo(req: Request, res: Response) {
-     const { id } = req.params;
+
+    const { id } = req.params;
     const { task } = req.body;
-    // @ts-ignore
+    //@ts-ignore
     const userId = req.user.id;
 
     try {

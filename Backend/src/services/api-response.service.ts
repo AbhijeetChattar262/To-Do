@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { ApiResponseType } from '../types';
 
 export class ApiResponseService {
-      public static apiResponse = (res: Response, code: number, message: string, data?: any) => {
+    public static apiResponse(res: Response, code: number, message: string, data?: any) {
         const response: ApiResponseType = {
             success: data ? true : false,
             code: code,
@@ -11,4 +11,5 @@ export class ApiResponseService {
         };
         return res.status(200).json(response);
     }
+    
 }

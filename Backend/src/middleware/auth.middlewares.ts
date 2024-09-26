@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import {AUTH_MESSAGES,} from "../constants/middleware";
-import { TokenUtils } from "../utils/token.utils";
-import { ApiResponseService } from "../services/api-response.service";
+import jwt from "jsonwebtoken";
+import {
+  AUTH_MESSAGES,
+  AUTH_HEADERS,
+  AUTH_PREFIXES,
+  AUTH_DEFAULTS,
+} from "../constants/middleware";
 
 // Extend the Request type to include user
 declare global {
@@ -18,17 +22,27 @@ export class AuthMiddleware {
     res: Response,
     next: NextFunction
   ) {
-    const token = TokenUtils.getToken(req);
+    const authHeader = req.headers[AUTH_HEADERS.AUTHORIZATION];
+
+    // Ensure authHeader is a string before calling startsWith
+    const token =
+      typeof authHeader === "string" &&
+      authHeader.startsWith(AUTH_PREFIXES.BEARER)
+        ? authHeader.split(" ")[1]
+        : null;
+
     if (!token)
-      return ApiResponseService.apiResponse(res, 401, AUTH_MESSAGES.UNAUTHORIZED);
+      return res.status(401).json({ message: AUTH_MESSAGES.UNAUTHORIZED });
+
     try {
-      const verified = TokenUtils.verifyToken(token);
+      const verified = jwt.verify(
+        token,
+        process.env.JWT_SECRET || AUTH_DEFAULTS.JWT_SECRET
+      );
       req.user = verified as { id: number };
-      if (!req.user.id)
-        return ApiResponseService.apiResponse(res, 401, AUTH_MESSAGES.UNAUTHORIZED);
       next();
     } catch (err) {
       res.status(401).json({ message: AUTH_MESSAGES.UNAUTHORIZED });
     }
   }
-} 
+}

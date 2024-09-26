@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(todosRouter);
-app.use(ErrorMiddleware.globalErrorHandler)
+app.use(ErrorMiddleware.errorHandler)
 
 db.then(() => {
   const PORT = process.env.PORT || 5000;

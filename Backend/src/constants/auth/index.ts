@@ -6,6 +6,7 @@ export const LOGIN_MESSAGES = {
     LOGIN_SUCCESS: "Login Successful",
   };
   export const REGISTER_MESSAGES = {
+    REGISTER_SUCCESS: "Register Successful",
     CREDENTIALS_NEEDED: "Credentials Needed",
     USER_ALREADY_EXISTS: "User already exists",
     ERROR_REGISTERING_USER: "Error registering user",
