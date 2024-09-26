@@ -1,7 +1,6 @@
 import { UserAuthManager } from "../../db/db-managers/user-auth.db-manager"; 
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { REGISTER_MESSAGES,JWT_SECRET } from "../../constants/auth";
+import { REGISTER_MESSAGES } from "../../constants/auth";
 import { UserAttributes } from "../../types/db-types";
 import { TokenUtils } from "../../utils/token.utils";
  export class UserAuthService {
