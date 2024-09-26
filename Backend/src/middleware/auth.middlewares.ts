@@ -5,7 +5,7 @@ import {
   AUTH_HEADERS,
   AUTH_PREFIXES,
   AUTH_DEFAULTS,
-} from "../constants/MIDDLEWARE/middlewareConstants";
+} from "../constants/middleware";
 
 // Extend the Request type to include user
 declare global {
