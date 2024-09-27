@@ -1,16 +1,10 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import Container from '../common/Container/Container';
+import { LoginContainerProps } from "../../interface/Auth";
 
-interface LoginContainerProps {
-  children: React.ReactNode;
-}
-
-const LoginContainer: React.FC<LoginContainerProps> = ({ children }) => {
+const LoginContainer: React.FC<LoginContainerProps>  = ({ children }) => {
   return (
-    <Container
-      className="d-flex flex-column justify-content-center align-items-center"
-      style={{ height: "100vh" }}
-    >
+    <Container width="400px">
       {children}
     </Container>
   );

@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import e, { Request, Response, NextFunction } from "express";
 import { UserAuthService } from "../services/db-services/user-auth.service";
 import { LOGIN_MESSAGES, REGISTER_MESSAGES } from "../constants/auth";
 import { ApiResponseService } from "../services/api-response.service";
@@ -9,7 +9,7 @@ class UserAuthController {
     const { username, password } = req.body;
 
     try {
-      const token = await UserAuthService.login(username, password);
+      const token = await UserAuthService.login(username, password, next);
       if (!token) {
         return ApiResponseService.apiResponse(res, 401, LOGIN_MESSAGES.INVALID_CREDENTIALS);
       } 
@@ -21,11 +21,11 @@ class UserAuthController {
   }
 
   // Register method
-  static async registerUser(req: Request, res: Response) {
+  static async registerUser(req: Request, res: Response, next: NextFunction) {
     const { username, password } = req.body;
 
     try {
-      const newUser = await UserAuthService.register(username, password);
+      const newUser = await UserAuthService.register(username, password, next);
       if (!newUser) {
         return ApiResponseService.apiResponse(res, 400, REGISTER_MESSAGES.USER_ALREADY_EXISTS);
       } 
