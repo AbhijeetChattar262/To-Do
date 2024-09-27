@@ -1,5 +1,10 @@
-import React from 'react';
-import { ErrorContainer, ErrorTitle, ErrorMessage, RetryButton } from './FallbackComponentStyles';
+import React from "react";
+import {
+  ErrorContainer,
+  ErrorTitle,
+  ErrorMessage,
+  RetryButton,
+} from "./FallbackComponentStyles";
 
 const FallbackComponent: React.FC = () => {
   const handleRetry = () => {

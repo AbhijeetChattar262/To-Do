@@ -1,4 +1,3 @@
-// Alert types for different operations
 export const LOGIN_SUCCESS_ALERT = "loginSuccess";
 export const AUTHENTICATION_FAILED_ALERT = "authenticationFailed";
 export const LOGOUT_ALERT = "logout";

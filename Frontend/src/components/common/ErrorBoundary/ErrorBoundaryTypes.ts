@@ -2,10 +2,9 @@ import { ReactNode } from "react";
 
 // Define the types for Props and State
 export interface ErrorBoundaryProps {
-    children: ReactNode;
-  }
-  
+  children: ReactNode;
+}
+
 export interface ErrorBoundaryState {
-    hasError: boolean;
-  }
-  
+  hasError: boolean;
+}

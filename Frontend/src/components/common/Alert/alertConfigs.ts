@@ -5,7 +5,7 @@ import {
   WarningAlert,
   InfoAlert,
   ButtonStyles,
-} from "./AlertStyles"; 
+} from "./AlertStyles";
 
 const alertConfigs: Record<string, SweetAlertOptions> = {
   loginSuccess: {
@@ -38,7 +38,7 @@ const alertConfigs: Record<string, SweetAlertOptions> = {
   invalidUsername: {
     icon: "error",
     title: "Invalid Username!!",
-    text:"Username must have at least 4 characters. Only letters and numbers are allowed.",
+    text: "Username must have at least 4 characters. Only letters and numbers are allowed.",
     customClass: {
       container: InfoAlert,
       confirmButton: ButtonStyles,

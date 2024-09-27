@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../common/Button/Button";
 import Input from "../common/Input/Input";
 import { FormContainer, FormGroup, FormLabel } from "../../styles/form.style";
-import  AuthService  from "../../services/auth.service";
+import AuthService from "../../services/auth.service";
 import {
   LOGIN,
   REGISTER,
@@ -55,18 +55,17 @@ const LoginForm: React.FC = () => {
             placeholder={PASSWORD_PLACEHOLDER}
             required
           />
-
         </FormGroup>
         <Button type="submit" buttonStyle="primary">
-            {LOGIN}
-          </Button>
-          <Button
-            type="button"
-            buttonStyle="secondary"
-            onClick={() => navigate("/register")}
-          >
-            {REGISTER}
-          </Button>
+          {LOGIN}
+        </Button>
+        <Button
+          type="button"
+          buttonStyle="secondary"
+          onClick={() => navigate("/register")}
+        >
+          {REGISTER}
+        </Button>
       </FormContainer>
     </Container>
   );

@@ -22,12 +22,36 @@ export const TodoContainer = styled.div`
   border-radius: 15px;
   background-color: #f7f7f7;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 400px) {
+    max-width: 90%;
+  }
+  
+  @media (max-width: 700px) {
+    max-width: 100%;
+    background-color: white;
+    box-shadow: none; 
+    padding: 15px; 
+  }
+  
+  @media (max-width: 375px) { 
+    margin: 20px 10px; 
+  }
+  
+  @media (max-width: 360px) { 
+    margin: 15px 5px; 
+    padding: 10px;
+  }
 `;
 
 export const TasksContainer = styled.div`
   display: flex;
   margin-bottom: 30px;
   border-radius: 10px; 
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export const TaskColumn = styled.div`
@@ -43,11 +67,18 @@ export const TaskColumn = styled.div`
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
   }
+
+  @media (max-width: 700px) {
+    margin: 10px 0; 
+  }
+
+  @media (max-width: 375px) {
+    padding: 15px; 
+  }
 `;
 // ============================================================= Containers Styles | TodoPage Styles End ============================================================
 
 // ========================================================================= Lists Styles ================================================================================================
-
 export const ListGroupStyled = styled.div`
   list-style: none;
   padding: 0;
@@ -61,6 +92,10 @@ export const ListItemStyled = styled.div`
   border-radius: 5px;
   margin-bottom: 10px;
   background-color: #fff;
+
+  @media (max-width: 700px) {
+    flex-direction: column; 
+  }
 `;
 
 export const CheckboxStyled = styled.input`
@@ -71,13 +106,16 @@ export const CheckboxStyled = styled.input`
 // ========================================================================= Lists Styles End ================================================================================================
 
 // ========================================================================= Header Styles ================================================================================================
-
 export const TitleYourTask = styled.h1`
   text-align: center;
   font-size: 2rem;
   color: #3498db;
   margin-top: 20px;
   font-weight: bold;
+
+  @media (max-width: 700px) {
+    font-size: 1.8rem; 
+  }
 `;
 
 export const TaskTitle = styled.h3`
@@ -87,6 +125,10 @@ export const TaskTitle = styled.h3`
   text-align: center;
   font-size: 1.8rem;
   letter-spacing: 0.5px;
+
+  @media (max-width: 700px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -94,6 +136,11 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const WelcomeMessage = styled.h3`
@@ -102,5 +149,11 @@ export const WelcomeMessage = styled.h3`
   font-weight: 500;
   font-family: cursive;
   margin-right: 20px;
+
+  @media (max-width: 700px) {
+    font-size: 1.3rem;
+    margin-right: 0; 
+    margin-bottom: 10px; 
+  }
 `;
 // ========================================================================= Header Styles End ================================================================================================
