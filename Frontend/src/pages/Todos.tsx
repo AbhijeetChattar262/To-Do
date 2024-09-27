@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { Todo } from "../interface/Todo";
 import TodoServices from "../services/todo.service";
-import  AuthService from "../services/auth.service";
+import AuthService from "../services/auth.service";
 
 import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
@@ -32,7 +32,7 @@ const Todos: React.FC = () => {
     e.preventDefault();
     if (editingTask) {
       TodoServices.handleUpdateTask(
-        editingTask, 
+        editingTask,
         newTask,
         setTodos,
         todos,

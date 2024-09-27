@@ -1,6 +1,5 @@
 export interface ContainerProps {
-    width?: string;
-    height?: string;
-    children: React.ReactNode;
-  }
-  
+  width?: string;
+  height?: string;
+  children: React.ReactNode;
+}

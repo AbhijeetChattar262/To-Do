@@ -1,5 +1,9 @@
 import React from "react";
-import { ListGroupStyled, ListItemStyled, CheckboxStyled } from "../../styles/todo.style";
+import {
+  ListGroupStyled,
+  ListItemStyled,
+  CheckboxStyled,
+} from "../../styles/todo.style";
 import Button from "../common/Button/Button";
 import TodoServices from "../../services/todo.service";
 import { TaskListProps } from "../../interface/Todo/index";
@@ -18,11 +22,13 @@ const TaskList: React.FC<TaskListProps> = ({
     <ListGroupStyled>
       {filteredTodos.map((todo) => (
         <ListItemStyled key={todo.id}>
-          <div> 
+          <div>
             <CheckboxStyled
               type="checkbox"
               checked={todo.completed}
-              onChange={() => TodoServices.handleToggleCompleted(todo.id, setTodos, todos)}
+              onChange={() =>
+                TodoServices.handleToggleCompleted(todo.id, setTodos, todos)
+              }
             />
             {todo.task}
           </div>
@@ -30,14 +36,18 @@ const TaskList: React.FC<TaskListProps> = ({
             <Button
               buttonStyle="warning"
               width="auto"
-              onClick={() => TodoServices.handleEditTask(todo, setEditingTask, setNewTask)}
+              onClick={() =>
+                TodoServices.handleEditTask(todo, setEditingTask, setNewTask)
+              }
             >
               {EDIT_LABEL}
             </Button>
             <Button
               buttonStyle="danger"
               width="auto"
-              onClick={() => TodoServices.handleDeleteTask(todo.id, setTodos, todos)}
+              onClick={() =>
+                TodoServices.handleDeleteTask(todo.id, setTodos, todos)
+              }
             >
               {DELETE_LABEL}
             </Button>

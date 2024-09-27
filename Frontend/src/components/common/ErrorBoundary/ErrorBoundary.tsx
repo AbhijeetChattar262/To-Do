@@ -2,7 +2,6 @@ import { Component } from "react";
 import { ErrorBoundaryProps, ErrorBoundaryState } from "./ErrorBoundaryTypes";
 import FallbackComponent from "./FallbackComponent/FallbackComponent";
 
-
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);

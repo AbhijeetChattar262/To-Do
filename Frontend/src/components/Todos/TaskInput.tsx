@@ -1,15 +1,15 @@
 import React from "react";
-import { TodoForm ,TodoInput} from "../../styles/todo.style";
+import { TodoForm, TodoInput } from "../../styles/todo.style";
 import Button from "../common/Button/Button";
 import { TaskInputProps } from "../../interface/Todo/index";
-import { ADD_TASK_LABEL,UPDATE_TASK_LABEL} from "../../constants/labels";
+import { ADD_TASK_LABEL, UPDATE_TASK_LABEL } from "../../constants/labels";
 import { ADD_TASK_PLACEHOLDER } from "../../constants/placeholders";
 
 const TaskInput: React.FC<TaskInputProps> = ({
   newTask,
   setNewTask,
   onSubmit,
-  editingTask
+  editingTask,
 }) => {
   return (
     <TodoForm onSubmit={onSubmit}>
@@ -18,7 +18,7 @@ const TaskInput: React.FC<TaskInputProps> = ({
         width={"97%"}
         placeholder={ADD_TASK_PLACEHOLDER}
         value={newTask}
-        onChange={(e:any) => setNewTask(e.target.value)}
+        onChange={(e: any) => setNewTask(e.target.value)}
         required
       />
       <Button type="submit" buttonStyle="primary" width="auto">

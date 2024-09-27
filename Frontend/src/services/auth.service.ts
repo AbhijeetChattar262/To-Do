@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   // ============================================= handleLogin service ended ===================================================
-  
+
 
   // ============================================= handleRegister service started =================================================
   public async handleRegister(
@@ -105,16 +105,16 @@ export class AuthService {
 
 
   // ============================================= handleLogout service started =================================================
-  
+
   public handleLogout(navigate: NavigateFunction): void {
     Alert({
-        alertType:LOGOUT_ALERT,
-        onConfirm: () => {
-          localStorage.removeItem("token"); // Clear the token
-          localStorage.removeItem("username"); // Clear the username
-          navigate("/login"); // Redirect to login page
-        },
-      });
+      alertType: LOGOUT_ALERT,
+      onConfirm: () => {
+        localStorage.removeItem("token"); // Clear the token
+        localStorage.removeItem("username"); // Clear the username
+        navigate("/login"); // Redirect to login page
+      },
+    });
   }
 }
 

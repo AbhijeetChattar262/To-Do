@@ -1,7 +1,7 @@
 // services/todoServices/TodoService.ts
 
 import axios from "axios";
-import {Todo}  from "../interface/Todo";
+import { Todo } from "../interface/Todo";
 import Alert from "../components/common/Alert/Alert";
 import { TODO_API_URL, TOGGLE_TODO_API_URL } from "../constants/api-urls";
 import {
@@ -22,7 +22,7 @@ class TodoServices {
 
   public static getInstance(): TodoServices {
     if (!TodoServices.instance) {
-        TodoServices.instance = new TodoServices();
+      TodoServices.instance = new TodoServices();
     }
     return TodoServices.instance;
   }
