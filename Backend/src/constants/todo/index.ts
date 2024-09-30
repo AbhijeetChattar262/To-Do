@@ -9,5 +9,9 @@ export const MESSAGES = {
     TODO_NOT_FOUND: "Todo not found",
     ERROR_TOGGLING_TASK: "Error toggling task completion",
     ERROR_UPDATING_TASK: "Error updating task",
+    TASK_UPDATED: "Task updated successfully",
+    TASK_ADDED: "Task added successfully",
+    TASKS_FETCHED: "Tasks fetched successfully",
+    TODO_NOT_CREATED: "Todo not created",
   };
   

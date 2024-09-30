@@ -1,7 +1,8 @@
-import e, { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { UserAuthService } from "../services/db-services/user-auth.service";
 import { LOGIN_MESSAGES, REGISTER_MESSAGES } from "../constants/auth";
 import { ApiResponseService } from "../services/api-response.service";
+import { CustomError } from "../utils/custom-error.util";
 
 class UserAuthController {
   // Login method
@@ -11,12 +12,12 @@ class UserAuthController {
     try {
       const token = await UserAuthService.login(username, password, next);
       if (!token) {
-        return ApiResponseService.apiResponse(res, 401, LOGIN_MESSAGES.INVALID_CREDENTIALS);
-      } 
-      return ApiResponseService.apiResponse(res, 200, LOGIN_MESSAGES.LOGIN_SUCCESS, { token });
+        throw new CustomError(LOGIN_MESSAGES.INVALID_CREDENTIALS, 401);
+      }
 
+      return ApiResponseService.apiResponse(res, 200, LOGIN_MESSAGES.LOGIN_SUCCESS, { token });
     } catch (err) {
-      next(err);
+      next(err);  
     }
   }
 
@@ -27,18 +28,14 @@ class UserAuthController {
     try {
       const newUser = await UserAuthService.register(username, password, next);
       if (!newUser) {
-        return ApiResponseService.apiResponse(res, 400, REGISTER_MESSAGES.USER_ALREADY_EXISTS);
-      } 
-      return ApiResponseService.apiResponse(res, 200, REGISTER_MESSAGES.REGISTER_SUCCESS);
-    } catch (err: any) {
-        next(err);
+        throw new CustomError(REGISTER_MESSAGES.REGISTER_FAILED, 400);
       }
+
+      return ApiResponseService.apiResponse(res, 200, REGISTER_MESSAGES.REGISTER_SUCCESS, { username: newUser.username });
+    } catch (err) {
+      next(err); 
     }
   }
-
-
-export default UserAuthController;
-function next(err: unknown) {
-  throw new Error("Function not implemented.");
 }
 
+export default UserAuthController;

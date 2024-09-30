@@ -7,7 +7,7 @@ export class UserAuthManager {
 
   // Find a user by username
   public static async findUserByUsername(username: string, next: NextFunction): Promise<UserAttributes | null> {
-    try{const userRecord = await this.adapter.findOne('User', { username });
+    try{const userRecord = await this.adapter.findOne('User', { username }, next);
     return userRecord as UserAttributes | null;}
     catch(error) {
       next(error);
@@ -19,7 +19,7 @@ export class UserAuthManager {
   public static async createUser(username: string, password: string, next: NextFunction): Promise<UserAttributes | null> {
     try {
       // Insert new user
-      const newUser = await this.adapter.create('User', { username, password });
+      const newUser = await this.adapter.create('User', { username, password }, next);
       return newUser as UserAttributes;
     } catch (error) {
       next(error);

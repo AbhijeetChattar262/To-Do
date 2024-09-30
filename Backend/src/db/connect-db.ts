@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { DB_MESSAGES } from '../constants/db';
+import { CustomError } from '../utils/custom-error.util';
 
 
 const prisma = new PrismaClient();
@@ -12,8 +13,7 @@ async function initializeDatabase() {
 
     return prisma;
   } catch (err) {
-    console.error(DB_MESSAGES.CONNECTION_ERROR, err);
-    throw err;
+    throw new CustomError(DB_MESSAGES.CONNECTION_ERROR, 500);
   }
 }
 

@@ -12,7 +12,7 @@ class TodoDbManager {
         task,
         completed: false,
         user: { connect: { id: userId } }
-      });
+      }, next);
 
       return newTodo as TodoAttributes;
     } catch (error) {
@@ -24,7 +24,7 @@ class TodoDbManager {
   // Get Todos by User ID
   public static async getTodosByUserId(userId: number, next: NextFunction): Promise<TodoAttributes[]> {
     try {
-      const todosList = await this.adapter.findAll('todo', { userId: userId });
+      const todosList = await this.adapter.findAll('todo', { userId: userId }, next);
       return todosList as TodoAttributes[];
     } catch (error) {
       next(error);
@@ -35,7 +35,7 @@ class TodoDbManager {
   // Find Todo by ID and User ID (for Toggle and Update)
   public static async findTodoByIdAndUserId(todoId: number, userId: number, next: NextFunction): Promise<TodoAttributes | null> {
     try {
-      const todo = await this.adapter.findOne('todo', { id: todoId, userId: userId });
+      const todo = await this.adapter.findOne('todo', { id: todoId, userId: userId }, next);
       return todo as TodoAttributes | null;
     } catch (error) {
       next(error);
@@ -44,10 +44,10 @@ class TodoDbManager {
   }
 
   // Toggle Todo Completion Status
-  public static async updateTodoCompletionStatus(todoId: number, userId: number, completed: boolean, next: NextFunction): Promise<boolean> {
+  public static async updateTodoCompletionStatus(todoId: number, userId: number, completed: boolean, next: NextFunction): Promise<TodoAttributes> {
     try {
-      await this.adapter.update('todo', { completed }, { id: todoId, userId: userId });
-      return true;
+      const todo = await this.adapter.update('todo', { completed }, { id: todoId, userId: userId }, next);
+      return todo as TodoAttributes;
     } catch (error) {
       next(error);
       return Promise.reject(error);
@@ -55,10 +55,10 @@ class TodoDbManager {
   }
 
   // Update Todo Task
-  public static async updateTodoTask(todoId: number, userId: number, task: string, next: NextFunction): Promise<boolean> {
+  public static async updateTodoTask(todoId: number, userId: number, task: string, next: NextFunction): Promise<TodoAttributes> {
     try {
-      await this.adapter.update('todo', { task }, { id: todoId, userId: userId });
-      return true;
+      const updatedTodo = await this.adapter.update('todo', { task }, { id: todoId, userId: userId }, next);
+      return updatedTodo as TodoAttributes;
     } catch (error) {
       next(error);
       return Promise.reject(error);
@@ -66,10 +66,10 @@ class TodoDbManager {
   }
 
   // Delete Todo
-  public static async deleteTodoById(id: number, userId: number, next: NextFunction): Promise<boolean> {
+  public static async deleteTodoById(id: number, userId: number, next: NextFunction): Promise<TodoAttributes> {
     try {
-      await this.adapter.destroy('todo', { id, userId });
-      return true;
+      const deletedTodo = await this.adapter.destroy('todo', { id, userId }, next);
+      return deletedTodo as TodoAttributes;
     } catch (error) {
       next(error);
       return Promise.reject(error);

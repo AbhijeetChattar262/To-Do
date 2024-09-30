@@ -6,11 +6,8 @@ import { NextFunction } from "express";
  export class UserAuthService {
    public  static async login(username: string, password: string, next: NextFunction): Promise<string | null> {
         const user: UserAttributes | null = await UserAuthManager.findUserByUsername(username, next);
-    
-        if (!user) {
-          return null;  // User not found
-        }
-    
+        if (!user) return null; 
+        
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return null;
     
@@ -23,9 +20,8 @@ import { NextFunction } from "express";
         // Check if the user already exists
         const existingUser = await UserAuthManager.findUserByUsername(username, next);
     
-        if (existingUser) {
-          return null;
-        }
+        if (existingUser) return null;
+        
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
     

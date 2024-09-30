@@ -11,5 +11,4 @@ export class ApiResponseService {
         };
         return res.status(200).json(response);
     }
-    
 }
