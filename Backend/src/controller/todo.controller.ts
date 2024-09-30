@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { MESSAGES } from "../constants/todo";
 import { TodoServices } from "../services/db-services/todo.service";
 import { ApiResponseService } from "../services/api-response.service";
 import { CustomError } from "../utils/custom-error.util";
+import { API_RESPONSES } from "../constants";
 class TodoController {
   // Add a new todo
   public static async addTodo(req: Request, res: Response, next: NextFunction) {
@@ -12,12 +12,12 @@ class TodoController {
 
     try {
       const newTodo = await TodoServices.addTodo(userId, task, next);
-      if (!newTodo) {
-        throw new CustomError(MESSAGES.TODO_NOT_CREATED, 404);
-      }
-      ApiResponseService.apiResponse(res, 201, MESSAGES.TASK_ADDED, {task: newTodo.task});
+      ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.CREATE_TODO_SUCCESS.code, API_RESPONSES.CONTROLLER.CREATE_TODO_SUCCESS.message, {task: newTodo.task});
     } catch (err) {
-      next(err);
+      if (err instanceof CustomError) {
+        next(err);
+      }
+      next(new CustomError(API_RESPONSES.CONTROLLER.CREATE_TODO_FAILED.message, API_RESPONSES.CONTROLLER.CREATE_TODO_FAILED.code));
     }
   }
 
@@ -29,14 +29,12 @@ class TodoController {
 
     try {
       const isDeleted = await TodoServices.deleteTodo(Number(id), userId, next);
-
-      if (!isDeleted) {
-        throw new CustomError(MESSAGES.TODO_NOT_FOUND, 404);
-      }
-
-      ApiResponseService.apiResponse(res, 200, MESSAGES.TASK_DELETED, {task: isDeleted.task});
+      ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.DELETE_TODO_SUCCESS.code, API_RESPONSES.CONTROLLER.DELETE_TODO_SUCCESS.message, {task: isDeleted.task});
     } catch (err) {
-      next(err);
+      if (err instanceof CustomError) {
+        next(err);
+      }
+      next(new CustomError(API_RESPONSES.CONTROLLER.DELETE_TODO_FAILED.message, API_RESPONSES.CONTROLLER.DELETE_TODO_FAILED.code));
     }
   }
 
@@ -47,9 +45,12 @@ class TodoController {
 
     try {
       const todos = await TodoServices.getTodos(userId, next);
-      ApiResponseService.apiResponse(res, 200, MESSAGES.TASKS_FETCHED, todos);
+      ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.GET_TODOS_BY_USER_ID_SUCCESS.code, API_RESPONSES.CONTROLLER.GET_TODOS_BY_USER_ID_SUCCESS.message, todos);
     } catch (err) {
-      next(err);
+      if (err instanceof CustomError) {
+        next(err);
+      }
+      next(new CustomError(API_RESPONSES.CONTROLLER.GET_TODOS_BY_USER_ID_FAILED.message, API_RESPONSES.CONTROLLER.GET_TODOS_BY_USER_ID_FAILED.code));
     }
   }
 
@@ -61,14 +62,15 @@ class TodoController {
 
     try {
       const updatedTodo = await TodoServices.toggleTodoCompletion(Number(id), userId, next);
-
       if (!updatedTodo) {
-        return ApiResponseService.apiResponse(res, 404, MESSAGES.TODO_NOT_FOUND);
+        throw new Error();
       }
-
-      ApiResponseService.apiResponse(res, 200, MESSAGES.TASK_UPDATED, {task: updatedTodo.task});
+      ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.UPDATE_COMPLETE_STATUS_TASK_SUCCESS.code, API_RESPONSES.CONTROLLER.UPDATE_COMPLETE_STATUS_TASK_SUCCESS.message, {task: updatedTodo.task});
     } catch (err) {
-      next(err);
+      if (err instanceof CustomError) {
+        next(err);
+      }
+      next(new CustomError(API_RESPONSES.CONTROLLER.UPDATE_COMPLETE_STATUS_TASK_FAILED.message, API_RESPONSES.CONTROLLER.UPDATE_COMPLETE_STATUS_TASK_FAILED.code));
     }
   }
 
@@ -83,12 +85,15 @@ class TodoController {
       const updatedTodo = await TodoServices.updateTodoTask(Number(id), userId, task, next);
 
       if (!updatedTodo) {
-        return ApiResponseService.apiResponse(res, 404, MESSAGES.TODO_NOT_FOUND);
+        throw new Error();
       }
 
-      ApiResponseService.apiResponse(res, 200, MESSAGES.TASK_UPDATED, {task: updatedTodo.task});
+      ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.UPDATE_TASK_SUCCESS.code, API_RESPONSES.CONTROLLER.UPDATE_TASK_SUCCESS.message, {task: updatedTodo.task});
     } catch (err) {
-      next(err);
+      if (err instanceof CustomError) {
+        next(err);
+      }
+      next(new CustomError(API_RESPONSES.CONTROLLER.UPDATE_TASK_FAILED.message, API_RESPONSES.CONTROLLER.UPDATE_TASK_FAILED.code));
     }
   }
 }

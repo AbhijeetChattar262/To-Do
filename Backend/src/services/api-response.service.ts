@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { ApiResponseType } from '../types';
+import { API_RESPONSES } from '../constants';
 
 export class ApiResponseService {
     public static apiResponse(res: Response, code: number, message: string, data?: any) {
@@ -9,6 +10,6 @@ export class ApiResponseService {
             message: message,
             data: data
         };
-        return res.status(200).json(response);
+        return res.status(API_RESPONSES.OK.code).json(response);
     }
 }

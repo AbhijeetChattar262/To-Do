@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { UserAuthService } from "../services/db-services/user-auth.service";
-import { LOGIN_MESSAGES, REGISTER_MESSAGES } from "../constants/auth";
 import { ApiResponseService } from "../services/api-response.service";
 import { CustomError } from "../utils/custom-error.util";
+import { API_RESPONSES } from "../constants";
 
 class UserAuthController {
   // Login method
@@ -12,12 +12,15 @@ class UserAuthController {
     try {
       const token = await UserAuthService.login(username, password, next);
       if (!token) {
-        throw new CustomError(LOGIN_MESSAGES.INVALID_CREDENTIALS, 401);
+        throw new CustomError(API_RESPONSES.CONTROLLER.INVALID_CREDENTIALS.message, API_RESPONSES.CONTROLLER.INVALID_CREDENTIALS.code);
       }
 
-      return ApiResponseService.apiResponse(res, 200, LOGIN_MESSAGES.LOGIN_SUCCESS, { token });
+      return ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.LOGIN_SUCCESS.code, API_RESPONSES.CONTROLLER.LOGIN_SUCCESS.message, { token });
     } catch (err) {
-      next(err);  
+      if (err instanceof CustomError) {
+        next(err);
+      }
+      next(new CustomError(API_RESPONSES.CONTROLLER.LOGIN_FAILED.message, API_RESPONSES.CONTROLLER.LOGIN_FAILED.code));
     }
   }
 
@@ -28,12 +31,15 @@ class UserAuthController {
     try {
       const newUser = await UserAuthService.register(username, password, next);
       if (!newUser) {
-        throw new CustomError(REGISTER_MESSAGES.REGISTER_FAILED, 400);
+        throw new CustomError(API_RESPONSES.CONTROLLER.USER_ALREADY_EXISTS.message, API_RESPONSES.CONTROLLER.USER_ALREADY_EXISTS.code);
       }
 
-      return ApiResponseService.apiResponse(res, 200, REGISTER_MESSAGES.REGISTER_SUCCESS, { username: newUser.username });
+      return ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.REGISTER_SUCCESS.code, API_RESPONSES.CONTROLLER.REGISTER_SUCCESS.message, { username: newUser.username });
     } catch (err) {
-      next(err); 
+      if (err instanceof CustomError) {
+        next(err);
+      }
+      next(new CustomError(API_RESPONSES.CONTROLLER.REGISTER_FAILED.message, API_RESPONSES.CONTROLLER.REGISTER_FAILED.code));
     }
   }
 }

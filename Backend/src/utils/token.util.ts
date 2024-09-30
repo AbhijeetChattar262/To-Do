@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
-import { AUTH_DEFAULTS, AUTH_HEADERS, AUTH_PREFIXES } from "../constants/middleware";
+import { Response } from "express";
+import { API_RESPONSES, AUTH_DEFAULTS, AUTH_HEADERS, AUTH_PREFIXES } from "../constants";
+import { ApiResponseService } from "../services/api-response.service";
 
 export class TokenUtils {
     static getToken(req: any) {
@@ -13,8 +15,12 @@ export class TokenUtils {
     return token;
     }
 
-    static verifyToken(token: string) {
-        return jwt.verify(token, process.env.JWT_SECRET || AUTH_DEFAULTS.JWT_SECRET);
+    static verifyToken(res: Response, token: string) {
+        try {
+            return jwt.verify(token, process.env.JWT_SECRET || AUTH_DEFAULTS.JWT_SECRET);
+        } catch (error) {
+            ApiResponseService.apiResponse(res, API_RESPONSES.UNAUTHORIZED.code, API_RESPONSES.UNAUTHORIZED.message);
+        }
     }
 
     static generateToken(id: number) {

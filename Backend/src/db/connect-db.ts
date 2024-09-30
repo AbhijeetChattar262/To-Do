@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { DB_MESSAGES } from '../constants/db';
+import { DB_MESSAGES } from '../constants';
 import { CustomError } from '../utils/custom-error.util';
 
 
