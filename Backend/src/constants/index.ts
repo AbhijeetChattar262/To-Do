@@ -85,51 +85,51 @@ export const API_RESPONSES = {
     },
     CREATE_TODO_SUCCESS: {
       message: "Todo created successfully",
-      code: 521,
+      code: 200,
     },
     GET_TODOS_BY_USER_ID_SUCCESS: {
       message: "Todos fetched successfully",
-      code: 522,
+      code: 200,
     },
     GET_TODOS_BY_ID_AND_USER_ID_SUCCESS: {
       message: "Todo fetched successfully",
-      code: 523,
+      code: 200,
     },
     UPDATE_COMPLETE_STATUS_TASK_SUCCESS: {
       message: "Todo completion status updated successfully",
-      code: 524,
+      code: 200,
     },
     UPDATE_TASK_SUCCESS: {
       message: "Todo task updated successfully",
-      code: 525,
+      code: 200,
     },
     DELETE_TODO_SUCCESS: {
       message: "Todo deleted successfully",
-      code: 526,
+      code: 200,
     },
     INVALID_CREDENTIALS: {
       message: "Invalid credentials",
       code: 531,
     },
-    LOGIN_SUCCESS: {
-      message: "Login successful",
-      code: 532,
-    },
     LOGIN_FAILED: {
       message: "Login failed",
-      code: 533,
-    },
-    REGISTER_SUCCESS: {
-      message: "Register successful",
-      code: 534,
+      code: 532,
     },
     REGISTER_FAILED: {
       message: "Register failed",
-      code: 535,
+      code: 533,
     },
     USER_ALREADY_EXISTS: {
       message: "User already exists",
-      code: 536,
+      code: 535,
+    },
+    LOGIN_SUCCESS: {
+      message: "Login successful",
+      code: 200,
+    },
+    REGISTER_SUCCESS: {
+      message: "Register successful",
+      code: 200,
     },
   },
   VALIDATION_MESSAGES: {
