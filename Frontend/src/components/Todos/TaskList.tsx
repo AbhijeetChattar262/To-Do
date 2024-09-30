@@ -1,18 +1,13 @@
-import { Button, Form, ListGroup } from "react-bootstrap";
-import { Todo } from "../../interface/Todo";
+import React from "react";
 import {
-  handleDeleteTask,
-  handleEditTask,
-  handleToggleCompleted,
-} from "../../services/todoServices";
-
-interface TaskListProps {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  setNewTask: React.Dispatch<React.SetStateAction<string>>;
-  setEditingTask: React.Dispatch<React.SetStateAction<Todo | null>>;
-  completed: any;
-}
+  ListGroupStyled,
+  ListItemStyled,
+  CheckboxStyled,
+} from "../../styles/todo.style";
+import Button from "../common/Button/Button";
+import TodoServices from "../../services/todo.service";
+import { TaskListProps } from "../../interface/Todo/index";
+import { EDIT_LABEL, DELETE_LABEL } from "../../constants/labels";
 
 const TaskList: React.FC<TaskListProps> = ({
   todos,
@@ -21,41 +16,45 @@ const TaskList: React.FC<TaskListProps> = ({
   setEditingTask,
   completed,
 }) => {
-  const filteredTodos = todos.filter((todo) => todo.completed == completed);
+  const filteredTodos = todos.filter((todo) => todo.completed === completed);
+
   return (
-    <ListGroup>
+    <ListGroupStyled>
       {filteredTodos.map((todo) => (
-        <ListGroup.Item
-          key={todo.id}
-          className="d-flex justify-content-between align-items-center"
-        >
+        <ListItemStyled key={todo.id}>
           <div>
-            <Form.Check
+            <CheckboxStyled
               type="checkbox"
               checked={todo.completed}
-              onChange={() => handleToggleCompleted(todo.id, setTodos, todos)}
+              onChange={() =>
+                TodoServices.handleToggleCompleted(todo.id, setTodos, todos)
+              }
             />
             {todo.task}
           </div>
           <div>
             <Button
-              variant="info"
-              onClick={() => handleEditTask(todo, setEditingTask, setNewTask)}
-              className="me-2 my-1"
+              buttonStyle="warning"
+              width="auto"
+              onClick={() =>
+                TodoServices.handleEditTask(todo, setEditingTask, setNewTask)
+              }
             >
-              Edit
+              {EDIT_LABEL}
             </Button>
             <Button
-              variant="danger"
-              className="me-2 my-1"
-              onClick={() => handleDeleteTask(todo.id, setTodos, todos)}
+              buttonStyle="danger"
+              width="auto"
+              onClick={() =>
+                TodoServices.handleDeleteTask(todo.id, setTodos, todos)
+              }
             >
-              Delete
+              {DELETE_LABEL}
             </Button>
           </div>
-        </ListGroup.Item>
+        </ListItemStyled>
       ))}
-    </ListGroup>
+    </ListGroupStyled>
   );
 };
 

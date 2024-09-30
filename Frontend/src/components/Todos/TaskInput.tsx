@@ -1,12 +1,9 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
-
-interface TaskInputProps {
-  newTask: string;
-  setNewTask: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: () => void;
-  editingTask: boolean;
-}
+import { TodoForm, TodoInput } from "../../styles/todo.style";
+import Button from "../common/Button/Button";
+import { TaskInputProps } from "../../interface/Todo/index";
+import { ADD_TASK_LABEL, UPDATE_TASK_LABEL } from "../../constants/labels";
+import { ADD_TASK_PLACEHOLDER } from "../../constants/placeholders";
 
 const TaskInput: React.FC<TaskInputProps> = ({
   newTask,
@@ -15,25 +12,19 @@ const TaskInput: React.FC<TaskInputProps> = ({
   editingTask,
 }) => {
   return (
-    <Form className="mb-4 mt-3">
-      <Form.Group controlId="formTask">
-        <Form.Control
-          type="text"
-          placeholder="Add a new task"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          required
-        />
-      </Form.Group>
-      <Button
-        variant={editingTask ? "warning" : "primary"}
-        type="submit"
-        onClick={onSubmit}
-        className="mt-2"
-      >
-        {editingTask ? "Update Task" : "Add Task"}
+    <TodoForm onSubmit={onSubmit}>
+      <TodoInput
+        type="text"
+        width={"97%"}
+        placeholder={ADD_TASK_PLACEHOLDER}
+        value={newTask}
+        onChange={(e: any) => setNewTask(e.target.value)}
+        required
+      />
+      <Button type="submit" buttonStyle="primary" width="auto">
+        {editingTask ? UPDATE_TASK_LABEL : ADD_TASK_LABEL}
       </Button>
-    </Form>
+    </TodoForm>
   );
 };
 

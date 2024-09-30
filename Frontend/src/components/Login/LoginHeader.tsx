@@ -1,8 +1,9 @@
 import React from "react";
-import { LOGIN } from "../../constants/HEADINGS";
+import { LOGIN } from "../../constants/labels";
+import { HeaderLabel } from "../../styles/form.style";
 
 const LoginHeader: React.FC = () => {
-  return <h2 className="mb-4 login-form">{LOGIN}</h2>;
+  return <HeaderLabel>{LOGIN}</HeaderLabel>;
 };
 
 export default LoginHeader;
