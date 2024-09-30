@@ -12,7 +12,7 @@ class TodoController {
 
     try {
       const newTodo = await TodoServices.addTodo(userId, task, next);
-      ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.CREATE_TODO_SUCCESS.code, API_RESPONSES.CONTROLLER.CREATE_TODO_SUCCESS.message, {task: newTodo.task});
+      ApiResponseService.apiResponse(res, API_RESPONSES.CONTROLLER.CREATE_TODO_SUCCESS.code, API_RESPONSES.CONTROLLER.CREATE_TODO_SUCCESS.message, newTodo);
     } catch (err) {
       if (err instanceof CustomError) {
         next(err);
