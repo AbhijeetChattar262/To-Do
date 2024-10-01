@@ -6,7 +6,7 @@ import {
 } from "../../styles/todo.style";
 import Button from "../common/Button/Button";
 import TodoServices from "../../services/todo.service";
-import { TaskListProps } from "../../interface/Todo/index";
+import { TaskListProps } from "../../interface/Todo";
 import { EDIT_LABEL, DELETE_LABEL } from "../../constants/labels";
 
 const TaskList: React.FC<TaskListProps> = ({

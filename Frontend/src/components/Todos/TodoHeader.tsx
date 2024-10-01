@@ -6,7 +6,7 @@ import {
   TitleYourTask,
 } from "../../styles/todo.style";
 import { LOGOUT, YOUR_TASKS } from "../../constants/labels";
-import { HeaderProps } from "../../interface/Todo/index";
+import { HeaderProps } from "../../interface/Todo";
 import { WELCOME } from "../../constants/messages";
 import Button from "../common/Button/Button";
 
