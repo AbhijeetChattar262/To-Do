@@ -5,6 +5,7 @@ import db from "./db/connect-db";
 import todosRouter from "./router/todo.router";
 import userRouter from "./router/user-auth.router";
 import {runPrismaCommands} from '../prisma/prisma-setup';
+import { ErrorMiddleware } from "./middleware/error.middleware";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(todosRouter);
+app.use(ErrorMiddleware.errorHandler)
 
 db.then(() => {
   const PORT = process.env.PORT || 5000;
