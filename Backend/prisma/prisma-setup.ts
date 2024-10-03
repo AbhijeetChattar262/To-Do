@@ -1,8 +1,8 @@
 import { execSync } from 'child_process';
-import { DATABASE_CONNECTION_URL } from '../prisma.config';
+// import { DATABASE_CONNECTION_URL } from '../prisma.config';
 
 
-process.env.DATABASE_CONNECTION_URL = DATABASE_CONNECTION_URL;
+// process.env.DATABASE_CONNECTION_URL = DATABASE_CONNECTION_URL;
 
 // Function to run Prisma commands
 export  const runPrismaCommands = () => {
