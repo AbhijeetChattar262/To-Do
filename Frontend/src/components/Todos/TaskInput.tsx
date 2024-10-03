@@ -1,18 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TodoForm, TodoInput } from "../../styles/todo.style";
 import Button from "../common/Button/Button";
-import { TaskInputProps } from "../../interface/Todo";
 import { ADD_TASK_LABEL, UPDATE_TASK_LABEL } from "../../constants/labels";
 import { ADD_TASK_PLACEHOLDER } from "../../constants/placeholders";
+import {TodoContext} from "../../context/Context";
 
-const TaskInput: React.FC<TaskInputProps> = ({
-  newTask,
-  setNewTask,
-  onSubmit,
-  editingTask,
-}) => {
+const TaskInput: React.FC = () => {
+  const { newTask, setNewTask, handleSubmit, editingTask } = useContext(TodoContext);
+  
   return (
-    <TodoForm onSubmit={onSubmit}>
+    <TodoForm onSubmit={handleSubmit}>
       <TodoInput
         type="text"
         width={"97%"}
