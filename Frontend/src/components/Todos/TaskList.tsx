@@ -1,22 +1,16 @@
-import React from "react";
-import {
-  ListGroupStyled,
-  ListItemStyled,
-  CheckboxStyled,
-} from "../../styles/todo.style";
+import React, { useContext } from "react";
+import { ListGroupStyled, ListItemStyled, CheckboxStyled } from "../../styles/todo.style";
 import Button from "../common/Button/Button";
 import TodoServices from "../../services/todo.service";
-import { TaskListProps } from "../../interface/Todo/index";
+import { TodoContext ,TaskCompletedContext}  from "../../context/Context";
 import { EDIT_LABEL, DELETE_LABEL } from "../../constants/labels";
 
-const TaskList: React.FC<TaskListProps> = ({
-  todos,
-  setTodos,
-  setNewTask,
-  setEditingTask,
-  completed,
-}) => {
-  const filteredTodos = todos.filter((todo) => todo.completed === completed);
+const TaskList: React.FC = () => {
+  const { todos, setTodos, setNewTask, setEditingTask} = useContext(TodoContext);
+  const completed=useContext(TaskCompletedContext);
+
+  // Filter todos based on completed status
+  const filteredTodos = todos.filter((todo) => todo.completed === completed );
 
   return (
     <ListGroupStyled>
@@ -26,9 +20,7 @@ const TaskList: React.FC<TaskListProps> = ({
             <CheckboxStyled
               type="checkbox"
               checked={todo.completed}
-              onChange={() =>
-                TodoServices.handleToggleCompleted(todo.id, setTodos, todos)
-              }
+              onChange={() => TodoServices.handleToggleCompleted(todo.id, setTodos, todos)}
             />
             {todo.task}
           </div>
@@ -36,18 +28,14 @@ const TaskList: React.FC<TaskListProps> = ({
             <Button
               buttonStyle="warning"
               width="auto"
-              onClick={() =>
-                TodoServices.handleEditTask(todo, setEditingTask, setNewTask)
-              }
+              onClick={() => TodoServices.handleEditTask(todo, setEditingTask, setNewTask)}
             >
               {EDIT_LABEL}
             </Button>
             <Button
               buttonStyle="danger"
               width="auto"
-              onClick={() =>
-                TodoServices.handleDeleteTask(todo.id, setTodos, todos)
-              }
+              onClick={() => TodoServices.handleDeleteTask(todo.id, setTodos, todos)}
             >
               {DELETE_LABEL}
             </Button>

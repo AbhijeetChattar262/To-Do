@@ -1,11 +1,8 @@
 import React, { useEffect, useState, Suspense } from "react";
-import { Todo } from "../interface/Todo";
+import { useNavigate } from "react-router-dom";
 import TodoServices from "../services/todo.service";
 import AuthService from "../services/auth.service";
-
-import { useNavigate } from "react-router-dom";
 import TaskInput from "../components/Todos/TaskInput";
-import Header from "../components/Todos/TodoHeader";
 import { PENDING_TASK, COMPLETED_TASK } from "../constants/labels";
 import Spinner from "../components/common/Spinner/Spinner";
 import {
@@ -14,6 +11,9 @@ import {
   TodoContainer,
   TaskColumn,
 } from "../styles/todo.style";
+import { TodoContext,TaskCompletedContext } from "../context/Context";
+import TodoHeader from "../components/Todos/TodoHeader";
+import { Todo } from "../interface/Todo";
 
 const TaskList = React.lazy(() => import("../components/Todos/TaskList"));
 
@@ -49,42 +49,43 @@ const Todos: React.FC = () => {
   };
 
   return (
-    <TodoContainer>
-      <Header username={username} onLogout={handleUserLogout} />
-      <TaskInput
-        newTask={newTask}
-        setNewTask={setNewTask}
-        onSubmit={handleSubmit}
-        editingTask={!!editingTask}
-      />
-      <TasksContainer>
-        <TaskColumn>
-          <TaskTitle>{PENDING_TASK}</TaskTitle>
-          <Suspense fallback={<Spinner />}>
-            <TaskList
-              todos={todos}
-              setTodos={setTodos}
-              setNewTask={setNewTask}
-              setEditingTask={setEditingTask}
-              completed={false}
-            />
-          </Suspense>
-        </TaskColumn>
+    <TodoContext.Provider
+      value={{
+        todos,
+        setTodos,
+        newTask,
+        setNewTask,
+        editingTask,
+        setEditingTask,
+        handleSubmit,
+        handleUserLogout,
+        username,
+      }}
+    >
+      <TodoContainer>
+        <TodoHeader />
+        <TaskInput />
+        <TasksContainer>
+          <TaskColumn>
+            <TaskCompletedContext.Provider value={false}>
+              <TaskTitle>{PENDING_TASK}</TaskTitle>
+              <Suspense fallback={<Spinner />}>
+                <TaskList />
+              </Suspense>
+            </TaskCompletedContext.Provider>
+          </TaskColumn>
 
-        <TaskColumn>
-          <TaskTitle>{COMPLETED_TASK}</TaskTitle>
-          <Suspense fallback={<Spinner />}>
-            <TaskList
-              todos={todos}
-              setTodos={setTodos}
-              setNewTask={setNewTask}
-              setEditingTask={setEditingTask}
-              completed={true}
-            />
-          </Suspense>
-        </TaskColumn>
-      </TasksContainer>
-    </TodoContainer>
+          <TaskColumn>
+            <TaskCompletedContext.Provider value={true}>
+            <TaskTitle>{COMPLETED_TASK}</TaskTitle>
+            <Suspense fallback={<Spinner />}>
+              <TaskList />
+            </Suspense>
+            </TaskCompletedContext.Provider>
+          </TaskColumn>
+        </TasksContainer>
+      </TodoContainer>
+    </TodoContext.Provider>
   );
 };
 

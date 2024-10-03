@@ -1,23 +1,25 @@
 // TodoHeader.tsx
-import React from "react";
+import React, { useContext } from "react";
 import {
   HeaderContainer,
   WelcomeMessage,
   TitleYourTask,
 } from "../../styles/todo.style";
 import { LOGOUT, YOUR_TASKS } from "../../constants/labels";
-import { HeaderProps } from "../../interface/Todo/index";
 import { WELCOME } from "../../constants/messages";
 import Button from "../common/Button/Button";
+import {TodoContext} from "../../context/Context";
 
-const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
+const TodoHeader: React.FC = () => {
+  const { handleUserLogout, username } = useContext(TodoContext);
+
   return (
     <>
       <HeaderContainer>
         <WelcomeMessage>
           {WELCOME}, {username}!
         </WelcomeMessage>
-        <Button buttonStyle="danger" width="auto" onClick={onLogout}>
+        <Button buttonStyle="danger" width="auto" onClick={handleUserLogout}>
           {LOGOUT}
         </Button>
       </HeaderContainer>
@@ -26,4 +28,4 @@ const Header: React.FC<HeaderProps> = ({ username, onLogout }) => {
   );
 };
 
-export default Header;
+export default TodoHeader;
