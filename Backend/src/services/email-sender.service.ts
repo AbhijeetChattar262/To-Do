@@ -3,7 +3,7 @@ import { EmailTransporterFactory } from "../config/email-transporter-factory";
 import { EmailTransporter } from "./email-transporter.service";
 
 class EmailSenderService {
-  private transporter: EmailTransporter; // Correctly typed as EmailTransporter
+  private transporter: EmailTransporter; 
 
   constructor() {
     // Initialize the transporter using the factory method
@@ -26,6 +26,7 @@ class EmailSenderService {
       return false;
     }
   }
+
 
   async sendVerificationEmail(username: string,verificationLink: string): Promise<boolean> {
     try {

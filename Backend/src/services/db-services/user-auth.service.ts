@@ -13,47 +13,41 @@ export class UserAuthService {
     return jwt.sign({ email }, JWT_SECRET, { expiresIn: "24h" });
   }
 
-  private static async sendVerificationEmail(email: string): Promise<void> {
-    const token = this.generateVerificationToken(email);
-    console.log("========================================================================");
-    console.log(`Verification token for ${email}: ${token}`);
-    console.log("========================================================================");
-
-    // const verificationLink = `${process.env.BACKEND_URL || 'https://todo-app-b-h20n.onrender.com'}/verify/${token}`;
-    const verificationLink = `${process.env.BACKEND_URL || 'https://todo-app-b-h20n.onrender.com'}/${token}`;
-
-    console.log("========================================================================");
-    console.log(`Verification link for ${email}: ${verificationLink}`);
-    console.log("========================================================================");
-
-
-    // Use dynamic email sender
-    const emailContent = prepareEmail.verificationEmail(email, verificationLink);
-    await this.emailSender.sendVerificationEmail(email,verificationLink);
-  }
-
   public static async login(username: string, password: string): Promise<{ token: string; verified: boolean } | null> {
     const user: UserAttributes | null = await UserAuthManager.findUserByUsername(username);
 
     if (!user) {
-      return null;  // User not found
+        return null; // User not found
     }
 
+    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return null;
 
     // Generate JWT token
     const token = jwt.sign(
-      { id: user.id },
-      JWT_SECRET,
-      { expiresIn: "1h" }
+        { id: user.id },
+        JWT_SECRET,
+        { expiresIn: "1h" }
     );
 
+    // // Send welcome email dynamically if the user is verified and hasn't received it before
+    // if (user.verified) {
+    //     const emailSent = await this.emailSender.sendWelcomeEmail(username);
+    //     if (emailSent) {
+    //         // Update the user record to indicate the welcome email has been sent
+    //         await UserAuthManager.update(user.id, { welcomeEmailSent: true });
+    //     }
+    // }
+
     return { token, verified: user.verified };
-  }
+}
 
   public static async register(username: string, password: string): Promise<UserAttributes | null> {
     const existingUser = await UserAuthManager.findUserByUsername(username);
+    const token = this.generateVerificationToken(username);
+    const verificationLink = `${process.env.BACKEND_URL || 'https://todo-app-b-h20n.onrender.com'}/${token}`;
+
 
     if (existingUser) {
       throw new Error(REGISTER_MESSAGES.USER_ALREADY_EXISTS);
@@ -63,11 +57,7 @@ export class UserAuthService {
     const newUser = await UserAuthManager.createUser(username, hashedPassword);
     
     // Sending verification email dynamically
-    await this.sendVerificationEmail(username);
-    
-    // Sending welcome email dynamically
-    const welcomeEmail = prepareEmail.welcomeEmail(username);
-    await this.emailSender.sendWelcomeEmail(username);
+    await this.emailSender.sendVerificationEmail(username,verificationLink);
     
     return newUser;
   }

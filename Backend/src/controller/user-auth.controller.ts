@@ -17,30 +17,36 @@ class UserAuthController {
     }
 
     try {
-        // Attempt to login the user
-        const result = await UserAuthService.login(username, password);
-
-        if (result) {
-            // Check if the user is verified
-            if (!result.verified) {
-                return res.status(400).json({
-                    message: LOGIN_MESSAGES.EMAIL_NOT_VERIFIED_ALERT,
-                });
-            }
-
-            // If verified, send login success response
-            return res.json({
-                message: LOGIN_MESSAGES.LOGIN_SUCCESS,
-                token: result.token,
-                verified: result.verified,
-            });
-        } else {
-            return res.status(400).json({ message: LOGIN_MESSAGES.INVALID_CREDENTIALS });
-        }
+      const token = await UserAuthService.login(username, password);
+      if (token) {
+        res.json({ message: LOGIN_MESSAGES.LOGIN_SUCCESS, token });
+      } else {
+        res.status(400).json({ message: LOGIN_MESSAGES.INVALID_CREDENTIALS });
+      }
     } catch (err) {
-        console.error("Error during login:", err);
-        res.status(500).json({ message: LOGIN_MESSAGES.SERVER_ERROR });
+      console.error("Error during login:", err);
+      res.status(500).json({ message: LOGIN_MESSAGES.SERVER_ERROR });
     }
+
+    // Use this snippet when you want to check whether user is verified or not
+    // try {
+    //   const result = await UserAuthService.login(username, password);
+    
+    //   if (result) {
+    //     // Check if the user is verified
+    //     if (!result.verified) {
+    //       return res.status(400).json({
+    //         message: LOGIN_MESSAGES.EMAIL_NOT_VERIFIED_ALERT,
+    //       });
+    //     }
+    //   } else {
+    //     return res.status(400).json({ message: LOGIN_MESSAGES.INVALID_CREDENTIALS });
+    //   }
+    // } catch (err) {
+    //   console.error("Error during login:", err);
+    //   res.status(500).json({ message: LOGIN_MESSAGES.SERVER_ERROR });
+    // }
+    
 }
 
   // Register method

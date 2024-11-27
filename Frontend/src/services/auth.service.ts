@@ -38,15 +38,6 @@ export class AuthService {
         username,
         password,
       });
-      if (!response.data.verified) {
-        // Show an alert that email verification is needed
-        Alert({
-          alertType: EMAIL_NOT_VERIFIED_ALERT,
-        });
-        return; 
-      }
-  
-      // If verified, store token and username in localStorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username", username);
 
