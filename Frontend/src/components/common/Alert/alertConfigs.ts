@@ -71,6 +71,15 @@ const alertConfigs: Record<string, SweetAlertOptions> = {
       confirmButton: ButtonStyles,
     },
   },
+  emailNotVerified: {
+    icon: "error",
+    title: "Email Not Verified!!",
+    text: "Please verify your email address.",
+    customClass: {
+      container: ErrorAlert,
+      confirmButton: ButtonStyles,
+    },
+  },
   taskCannotBeEmpty: {
     icon: "error",
     title: "Task cannot be empty",

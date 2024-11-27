@@ -1,45 +1,91 @@
-import { UserAuthManager } from "../../db/db-managers/user-auth.db-manager"; 
+import { UserAuthManager } from "../../db/db-managers/user-auth.db-manager";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { REGISTER_MESSAGES,JWT_SECRET } from "../../constants/auth";
+import { REGISTER_MESSAGES, JWT_SECRET } from "../../constants/auth";
 import { UserAttributes } from "../../types/db-types";
- export class UserAuthService {
-   public  static async login(username: string, password: string): Promise<string | null> {
-        const user: UserAttributes | null = await UserAuthManager.findUserByUsername(username);
+import EmailSenderService from "../email-sender.service";  // Import the dynamic email sender
+import { prepareEmail } from "../../utils/prepareEmail";
+
+export class UserAuthService {
+  private static emailSender = new EmailSenderService();  // Initialize dynamic email sender
+
+  private static generateVerificationToken(email: string): string {
+    return jwt.sign({ email }, JWT_SECRET, { expiresIn: "24h" });
+  }
+
+  private static async sendVerificationEmail(email: string): Promise<void> {
+    const token = this.generateVerificationToken(email);
+    console.log("========================================================================");
+    console.log(`Verification token for ${email}: ${token}`);
+    console.log("========================================================================");
+
+    // const verificationLink = `${process.env.BACKEND_URL || 'https://todo-app-b-h20n.onrender.com'}/verify/${token}`;
+    const verificationLink = `${process.env.BACKEND_URL || 'https://todo-app-b-h20n.onrender.com'}/${token}`;
+
+    console.log("========================================================================");
+    console.log(`Verification link for ${email}: ${verificationLink}`);
+    console.log("========================================================================");
+
+
+    // Use dynamic email sender
+    const emailContent = prepareEmail.verificationEmail(email, verificationLink);
+    await this.emailSender.sendVerificationEmail(email,verificationLink);
+  }
+
+  public static async login(username: string, password: string): Promise<{ token: string; verified: boolean } | null> {
+    const user: UserAttributes | null = await UserAuthManager.findUserByUsername(username);
+
+    if (!user) {
+      return null;  // User not found
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return null;
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user.id },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    return { token, verified: user.verified };
+  }
+
+  public static async register(username: string, password: string): Promise<UserAttributes | null> {
+    const existingUser = await UserAuthManager.findUserByUsername(username);
+
+    if (existingUser) {
+      throw new Error(REGISTER_MESSAGES.USER_ALREADY_EXISTS);
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await UserAuthManager.createUser(username, hashedPassword);
     
-        if (!user) {
-          return null;  // User not found
-        }
+    // Sending verification email dynamically
+    await this.sendVerificationEmail(username);
     
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return null;
+    // Sending welcome email dynamically
+    const welcomeEmail = prepareEmail.welcomeEmail(username);
+    await this.emailSender.sendWelcomeEmail(username);
     
-        // Generate JWT token
-        const token = jwt.sign(
-          { id: user.id },
-          JWT_SECRET,
-          { expiresIn: "1h" }
-        );
-    
-        return token;
+    return newUser;
+  }
+
+  public static async verifyEmail(token: string): Promise<boolean> {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET) as { email: string };
+      const user = await UserAuthManager.findUserByUsername(decoded.email);
+      
+      if (!user) {
+        return false;
       }
 
-    public   static async register(username: string, password: string): Promise<UserAttributes | null> {
-        // Check if the user already exists
-        const existingUser = await UserAuthManager.findUserByUsername(username);
-    
-        if (existingUser) {
-          
-          throw new Error(REGISTER_MESSAGES.USER_ALREADY_EXISTS);
-        }
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-    
-        // Create a new user
-        const newUser = await UserAuthManager.createUser(username, hashedPassword);
-    
-        return newUser;
-      }
+      // Update user's verified status
+      await UserAuthManager.updateUserVerification(decoded.email);
+      return true;
+    } catch (error) {
+      return false;
     }
-    
-    
+  }
+}

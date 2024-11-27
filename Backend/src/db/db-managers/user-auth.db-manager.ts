@@ -4,7 +4,7 @@ import { UserAttributes } from "../../types/db-types";
 export class UserAuthManager {
   private static adapter = PrismaAdapter.getInstance();
 
-  // Find a user by username
+  // Find a user by username (acting as email)
   public static async findUserByUsername(username: string): Promise<UserAttributes | null> {
     const userRecord = await this.adapter.findOne('User', { username });
     return userRecord as UserAttributes | null;
@@ -19,6 +19,16 @@ export class UserAuthManager {
     } catch (error) {
       console.error("Error creating user:", error);
       return null;
+    }
+  }
+
+  // Update user verification status by username (acting as email)
+  public static async updateUserVerification(username: string): Promise<void> {
+    try {
+      await this.adapter.update('User', { verified: true }, { username });
+    } catch (error) {
+      console.error("Error updating user verification status:", error);
+      throw error;
     }
   }
 }

@@ -7,6 +7,7 @@ interface AlertProps {
   | "registerSuccess"
   | "userAlreadyExists"
   | "registerFailed"
+  | "emailNotVerified"
   | "taskCannotBeEmpty"
   | "credentialsCannotBeEmpty"
   | "logout"
