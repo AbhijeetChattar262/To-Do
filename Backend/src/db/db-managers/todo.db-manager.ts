@@ -1,11 +1,14 @@
 import { PrismaAdapter } from "../mssql/prisma.adapter";
 import { TodoAttributes } from "../../types/db-types";
+import { CustomError } from "../../utils/custom-error.util";
+import { NextFunction } from "express";
+import { API_RESPONSES } from "../../constants";
 
 class TodoDbManager {
   private static adapter = PrismaAdapter.getInstance();
 
   // Add Todo
-  public static async createTodo(userId: number, task: string): Promise<TodoAttributes> {
+  public static async createTodo(userId: number, task: string, next: NextFunction): Promise<TodoAttributes> {
     try {
       const newTodo = await this.adapter.create('todo', {
         task,
@@ -15,63 +18,57 @@ class TodoDbManager {
 
       return newTodo as TodoAttributes;
     } catch (error) {
-      console.error("Error creating todo:", error);
-      throw error;
+      throw new CustomError(API_RESPONSES.DB.CREATE_TODO_FAILED.message, API_RESPONSES.DB.CREATE_TODO_FAILED.code);
     }
   }
 
   // Get Todos by User ID
-  public static async getTodosByUserId(userId: number): Promise<TodoAttributes[]> {
+  public static async getTodosByUserId(userId: number, next: NextFunction): Promise<TodoAttributes[]> {
     try {
       const todosList = await this.adapter.findAll('todo', { userId: userId });
       return todosList as TodoAttributes[];
     } catch (error) {
-      console.error("Error fetching todos:", error);
-      throw error;
+      throw new CustomError(API_RESPONSES.DB.GET_TODOS_BY_USER_ID_FAILED.message, API_RESPONSES.DB.GET_TODOS_BY_USER_ID_FAILED.code);
     }
   }
 
   // Find Todo by ID and User ID (for Toggle and Update)
-  public static async findTodoByIdAndUserId(todoId: number, userId: number): Promise<TodoAttributes | null> {
+  public static async findTodoByIdAndUserId(todoId: number, userId: number, next: NextFunction): Promise<TodoAttributes | null> {
     try {
       const todo = await this.adapter.findOne('todo', { id: todoId, userId: userId });
       return todo as TodoAttributes | null;
     } catch (error) {
-      console.error("Error finding todo:", error);
-      throw error;
+      throw new CustomError(API_RESPONSES.DB.GET_TODOS_BY_ID_AND_USER_ID_NOT_FOUND.message, API_RESPONSES.DB.GET_TODOS_BY_ID_AND_USER_ID_NOT_FOUND.code);
     }
   }
 
   // Toggle Todo Completion Status
-  public static async updateTodoCompletionStatus(todoId: number, userId: number, completed: boolean): Promise<boolean> {
+  public static async updateTodoCompletionStatus(todoId: number, userId: number, completed: boolean, next: NextFunction): Promise<TodoAttributes> {
     try {
-      await this.adapter.update('todo', { completed }, { id: todoId, userId: userId });
-      return true;
+      const todo = await this.adapter.update('todo', { completed }, { id: todoId, userId: userId });
+      return todo as TodoAttributes;
     } catch (error) {
-      console.error("Error updating todo completion status:", error);
-      return false;
+      throw new CustomError(API_RESPONSES.DB.UPDATE_COMPLETE_STATUS_TASK_FAILED.message, API_RESPONSES.DB.UPDATE_COMPLETE_STATUS_TASK_FAILED.code);
     }
   }
 
   // Update Todo Task
-  public static async updateTodoTask(todoId: number, userId: number, task: string): Promise<boolean> {
+  public static async updateTodoTask(todoId: number, userId: number, task: string, next: NextFunction): Promise<TodoAttributes> {
     try {
-      await this.adapter.update('todo', { task }, { id: todoId, userId: userId });
-      return true;
+      const updatedTodo = await this.adapter.update('todo', { task }, { id: todoId, userId: userId });
+      return updatedTodo as TodoAttributes;
     } catch (error) {
-      console.error("Error updating todo task:", error);
-      return false;
+      throw new CustomError(API_RESPONSES.DB.UPDATE_TASK_FAILED.message, API_RESPONSES.DB.UPDATE_TASK_FAILED.code);
     }
   }
 
   // Delete Todo
-  public static async deleteTodoById(id: number, userId: number): Promise<boolean> {
+  public static async deleteTodoById(id: number, userId: number, next: NextFunction): Promise<TodoAttributes> {
     try {
-      await this.adapter.destroy('todo', { id, userId });
-      return true;
+      const deletedTodo = await this.adapter.destroy('todo', { id, userId });
+      return deletedTodo as TodoAttributes;
     } catch (error) {
-      console.error("Error deleting todo:", error);
-      return false;
+      throw new CustomError(API_RESPONSES.DB.DELETE_TODO_FAILED.message, API_RESPONSES.DB.DELETE_TODO_FAILED.code);
     }
   }
 }

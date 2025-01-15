@@ -41,7 +41,7 @@ export class AuthService {
         username,
         password,
       });
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.data.token);
       localStorage.setItem("username", username);
 
       Alert({
@@ -80,7 +80,7 @@ export class AuthService {
               onConfirm: () => navigate("/login"),
             });
           } catch (err: any) {
-            if (err.response?.status === 409) {
+            if (err.response?.data.code === 409) {
               // 409 indicates user already exists
               setUsername("");
               setPassword("");

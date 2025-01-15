@@ -35,12 +35,12 @@ class TodoServices {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.get<Todo[]>(TODO_API_URL, {
+      const response = await axios.get(TODO_API_URL, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setTodos(response.data);
+      setTodos(response.data.data);
     } catch (error) {
       console.error({ FETCH_TODOS_ERROR }, error);
     }
@@ -73,7 +73,7 @@ class TodoServices {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setTodos([...todos, response.data]);
+      setTodos([...todos, response.data.data]);
       setNewTask(""); // Clear the input after successful addition
     } catch (error) {
       console.error({ FAILED_TO_ADD_TASK_ERROR }, error);
