@@ -7,6 +7,7 @@ class TodoController {
    public static async addTodo(req: Request, res: Response) {
     if (!req.user) {
       console.error(MESSAGES.UNAUTHORIZED); // Debug output
+      // res.setHeader('X-Content-Type-Options', 'nosniff');
       return res.status(401).json({ message: MESSAGES.UNAUTHORIZED });
     }
 

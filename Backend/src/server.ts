@@ -17,6 +17,12 @@ app.use(express.json());
 app.use(userRouter);
 app.use(todosRouter);
 
+// Set headers for security
+// app.use((req, res, next) => {
+//   res.setHeader("X-Content-Type-Options", "nosniff"); // Set the nosniff header
+//   next();
+// });
+
 db.then(() => {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {

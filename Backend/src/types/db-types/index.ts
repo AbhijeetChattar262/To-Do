@@ -8,4 +8,6 @@ export type  UserAttributes= {
     id: number;
     username: string;
     password: string;
+    email: string;
+    verified: boolean;  // Add the 'verified' field
 }

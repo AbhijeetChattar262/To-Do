@@ -9,6 +9,8 @@ export const REGISTER_SUCCESS_ALERT = "registerSuccess";
 export const USER_ALREADY_EXISTS_ALERT = "userAlreadyExists";
 export const REGISTERATION_FAILED_ALERT = "registerFailed";
 
+export const EMAIL_NOT_VERIFIED_ALERT = "emailNotVerified";
+
 export const TASK_CANNOT_BE_EMPTY_ALERT = "taskCannotBeEmpty";
 export const DELETE_TASK_ALERT = "deleteTask";
 

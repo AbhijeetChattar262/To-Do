@@ -7,14 +7,12 @@ import {
   AUTHENTICATION_FAILED_ALERT,
   REGISTER_SUCCESS_ALERT,
   REGISTERATION_FAILED_ALERT,
-  INVALID_USERNAME_ALERT,
-  INVALID_PASSWORD_ALERT,
   USER_ALREADY_EXISTS_ALERT,
+  EMAIL_NOT_VERIFIED_ALERT,
   CREDENTIALS_CANNOT_BE_EMPTY_ALERT,
   LOGOUT_ALERT,
 } from "../constants/alerts";
-import { isPasswordValid, isUsernameValid } from "../helpers/username-password-validator";
-
+import { isPasswordValid } from "../helpers/username-password-validator";
 
 // ============================================= AuthService class started =================================================
 export class AuthService {
@@ -26,7 +24,6 @@ export class AuthService {
     }
     return AuthService.instance;
   }
-
 
   // ============================================= handleLogin service started ===================================================
   public async handleLogin(
@@ -53,9 +50,9 @@ export class AuthService {
       Alert({ alertType: AUTHENTICATION_FAILED_ALERT });
     }
   }
-
+   
+  
   // ============================================= handleLogin service ended ===================================================
-
 
   // ============================================= handleRegister service started =================================================
   public async handleRegister(
@@ -68,44 +65,36 @@ export class AuthService {
   ): Promise<void> {
     e.preventDefault();
     if (username.trim() !== "" && password.trim() !== "") {
-      if (isUsernameValid(username)) {
-        if (isPasswordValid(password)) {
-          try {
-            await axios.post(REGISTER_API_URL, {
-              username,
-              password,
-            });
-            Alert({
-              alertType: REGISTER_SUCCESS_ALERT,
-              onConfirm: () => navigate("/login"),
-            });
-          } catch (err: any) {
-            if (err.response?.status === 409) {
-              // 409 indicates user already exists
-              setUsername("");
-              setPassword("");
-              Alert({ alertType: USER_ALREADY_EXISTS_ALERT });
-            } else {
-              Alert({ alertType: REGISTERATION_FAILED_ALERT });
-            }
+      if (isPasswordValid(password)) {
+        try {
+          await axios.post(REGISTER_API_URL, {
+            username,
+            password,
+          });
+          console.log("Registering user:", { username, password });
+          Alert({
+            alertType: REGISTER_SUCCESS_ALERT,
+            onConfirm: () => navigate("/login"),
+          });
+        } catch (err: any) {
+          if (err.response?.status === 409) {
+            // 409 indicates user already exists
+            setUsername("");
+            setPassword("");
+            Alert({ alertType: USER_ALREADY_EXISTS_ALERT });
+          } else {
+            console.log("Registering user:", { username, password });
+            Alert({ alertType: REGISTERATION_FAILED_ALERT });
           }
-        } else {
-          Alert({ alertType: INVALID_PASSWORD_ALERT });
         }
-      } else {
-        Alert({ alertType: INVALID_USERNAME_ALERT });
-      }
+      } 
     } else {
       Alert({ alertType: CREDENTIALS_CANNOT_BE_EMPTY_ALERT });
     }
   }
-
   // ============================================= handleRegister service ended =================================================
 
-
-
   // ============================================= handleLogout service started =================================================
-
   public handleLogout(navigate: NavigateFunction): void {
     Alert({
       alertType: LOGOUT_ALERT,
@@ -117,13 +106,9 @@ export class AuthService {
     });
   }
 }
-
 // ============================================= handleLogout service ended =================================================
 
-
 // ============================================= AuthService class ended =================================================
-
-
 
 // ============================================= Exporting instance of AuthService =================================================
 export default AuthService.getInstance();

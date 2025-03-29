@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlserver"
+  provider = "mysql"
   url      = env("DATABASE_CONNECTION_URL")
 }
 
@@ -18,8 +18,9 @@ model todo {
 }
 
 model user {
-  id       Int    @id @default(autoincrement())
-  username String @unique(map: "User_username_key")
-  password String
-  todo     todo[]
+  id        Int     @id @default(autoincrement())
+  username  String  @unique(map: "User_username_key") // Treating 'username' as email
+  password  String
+  verified  Boolean @default(false)
+  todo      todo[]
 }
